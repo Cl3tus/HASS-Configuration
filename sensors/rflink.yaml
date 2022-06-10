@@ -1,0 +1,30 @@
+# RFLink 433 MHz Sensors
+## Buitentemperatuurmeter
+- platform: rflink
+  automatic_add: false
+  devices:
+    cresta_2e01_temp:
+      name: 'Buiten Temperatuur'
+      sensor_type: temperature
+    cresta_2e01_hum:
+      name: 'Buiten Vochtigheid'
+      sensor_type: humidity
+    cresta_2e01_update_time:
+      name: 'Buiten Update Tijd'
+      sensor_type: update_time
+    cresta_2e01_bat:
+      name: 'Buiten Batterij Niveau'
+      sensor_type: battery
+## Binnentemperatuurmeter
+    cresta_2901_temp:
+      name: 'Woonkamer Temperatuur'
+      sensor_type: temperature
+    cresta_2901_hum:
+      name: 'Woonkamer Vochtigheid'
+      sensor_type: humidity
+    cresta_2901_update_time:
+      name: 'Woonkamer Update Tijd'
+      sensor_type: update_time
+    cresta_2901_bat:
+      name: 'Woonkamer Batterij Niveau'
+      sensor_type: battery

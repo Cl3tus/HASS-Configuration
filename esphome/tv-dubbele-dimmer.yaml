@@ -1,0 +1,91 @@
+esphome:
+  name: tv-dubbele-dimmer
+  comment: TV Dubbele AC Dimmer
+  
+esp32:
+  board: esp32dev
+  #restore_from_flash: true
+
+preferences:
+  flash_write_interval: 1min
+
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "TV Dimmer"
+    password: !secret pb_std_pass
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+# Timesync with home
+time:
+  - platform: homeassistant
+
+# Variables
+substitutions:
+  name: tv-dubbele-dimmer
+  friendly_name: "TV Dubbele Dimmer"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+output:
+  - platform: ac_dimmer
+    id: ac_esp_dimmer_1
+    gate_pin: GPIO16
+    method: leading pulse
+    init_with_half_cycle: true
+    zero_cross_pin:
+      number: GPIO17
+      mode: INPUT_PULLUP
+      inverted: yes
+  - platform: ac_dimmer
+    id: ac_esp_dimmer_2
+    gate_pin: GPIO33
+    zero_cross_pin:
+      number: GPIO32
+      mode: INPUT
+      inverted: yes
+
+light:
+  - platform: monochromatic
+    output: ac_esp_dimmer_1
+    name: "Zoutlamp"
+    gamma_correct: 0
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: monochromatic
+    output: ac_esp_dimmer_2
+    name: "Seleniet"
+    restore_mode: RESTORE_DEFAULT_OFF

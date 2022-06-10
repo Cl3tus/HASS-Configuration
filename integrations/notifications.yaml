@@ -1,0 +1,40 @@
+# Integration for Notification platform
+- name: telegram_paul
+  platform: telegram
+  chat_id: !secret telegram_chat_id_paul
+- name: telegram_irene
+  platform: telegram
+  chat_id: !secret telegram_chat_id_irene
+- name: telegram_thuis
+  platform: telegram
+  chat_id: !secret telegram_chat_id_thuis
+- name: telegram_bud_hut
+  platform: telegram
+  chat_id: !secret telegram_chat_id_bud_hut
+- name: html5_push
+  platform: html5
+  vapid_pub_key: !secret vapid_pub_key
+  vapid_prv_key: !secret vapid_prv_key
+  vapid_email: !secret vapid_email
+- name: WhatsApp_Paul
+  platform: rest
+  resource: https://api.callmebot.com/whatsapp.php
+  data:
+    source: HA
+    phone: !secret callmebot_whatsapp_paul_phone
+    apikey: !secret callmebot_whatsapp_paul_api
+- name: WhatsApp_Irene
+  platform: rest
+  resource: https://api.callmebot.com/whatsapp.php
+  data:
+    source: HA
+    phone: !secret callmebot_whatsapp_irene_phone
+    apikey: !secret callmebot_whatsapp_irene_api
+- name: Telegram_Call
+  platform: rest
+  resource: https://api.callmebot.com/start.php
+  data:
+    source: HA
+    user: !secret telegram_call_user
+    lang: nl-NL-Wavenet-D
+    rpt: 1

@@ -1,0 +1,3 @@
+  - platform: intesishome
+    username: !secret intesis_user
+    password: !secret intesis_pass

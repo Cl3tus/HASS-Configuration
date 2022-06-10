@@ -1,0 +1,31 @@
+google_home_resume_ytube_seek:
+  alias: 00 🔊 Google Home Resume - Ytube seek
+  description: Helper script for the Google Home Resume script to set ytube music
+    position
+  icon: mdi:cast-audio
+  mode: parallel
+  sequence:
+  - alias: Wait until song is playing
+    wait_template: "{{ \n  iif(state_attr(player.player, '_media_id'))\n  and iif(state_attr(player.player,\
+      \ 'media_position'))\n}}\n"
+  - alias: Seek
+    service: media_player.media_seek
+    target:
+      entity_id: '{{ player.player }}'
+    data:
+      seek_position: '{{ player.position }}
+
+        '
+  - alias: Adjust volume
+    repeat:
+      count: '{{ target_ytube | count }}'
+      sequence:
+      - variables:
+          player: "{{ \n  player_data\n    | selectattr('entity_id', 'eq', target_ytube[repeat.index\
+            \ - 1])\n    | join\n}}\n"
+      - alias: Set volume back to old state
+        service: media_player.volume_set
+        target:
+          entity_id: '{{ player.entity_id }}'
+        data:
+          volume_level: '{{ player.volume_level }}'

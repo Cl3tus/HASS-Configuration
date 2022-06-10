@@ -1,0 +1,129 @@
+esphome:
+  name: minecraft-torch-1
+  comment: Minecraft Torch 1
+
+esp32:
+  board: esp32dev
+  #restore_from_flash: true
+
+preferences:
+  flash_write_interval: 1min
+
+# Enable logging
+logger:
+#    level: VERY_VERBOSE
+    
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Minecraft Torch 1"
+    password: !secret pb_std_pass
+
+captive_portal:
+
+# Timesync with home
+time:
+  - platform: homeassistant
+
+# Variables
+substitutions:
+  name: minecraft-torch-1
+  friendly_name: "Minecraft Torch 1"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+# Light
+light:
+  - platform: neopixelbus
+    method: esp32_i2s
+    type: GRBW
+    variant: SK6812
+    color_correct: [95%, 95%, 95%, 95%]
+    pin: GPIO13
+    num_leds: 12
+    name: "Minecraft Torch 1"
+    effects:
+      - flicker:
+          name: Fire
+          alpha: 90%
+          intensity: 3.5%
+      - addressable_rainbow:
+    restore_mode: RESTORE_DEFAULT_OFF
+
+# BLE Tracker
+esp32_ble_tracker:
+
+# Slaapkamer Jongens BLE Gateway
+#sensor:
+#  - platform: atc_mithermometer
+#    mac_address: "A4:C1:38:4C:89:2A"
+#    temperature:
+#      name: "Slaapkamer Jongens Temperatuur ATC"
+#      force_update: true
+#    humidity:
+#      name: "Slaapkamer Jongens Vochtigheid ATC"
+#      force_update: true
+#    battery_level:
+#      name: "Slaapkamer Jongens Battery-Level ATC"
+#      force_update: true
+#    battery_voltage:
+#      name: "Slaapkamer Jongens Battery-Voltage ATC"
+#      force_update: true
+#  - platform: atc_mithermometer
+#    mac_address: "A4:C1:38:FA:8A:D9"
+#    temperature:
+#      name: "Computer Kamer Temperatuur ATC"
+#      force_update: true
+#    humidity:
+#      name: "Computer Kamer Vochtigheid ATC"
+#      force_update: true
+#    battery_level:
+#      name: "Computer Kamer Battery-Level ATC"
+#      force_update: true
+#    battery_voltage:
+#      name: "Computer Kamer Battery-Voltage ATC"
+#      force_update: true
+  #- platform: atc_mithermometer
+  #  mac_address: "A4:C1:38:C3:9D:4A"
+  #  temperature:
+  #    name: "Rommel Kamer Temperatuur ATC"
+  #    force_update: true
+  #  humidity:
+  #    name: "Rommel Kamer Vochtigheid ATC"
+  #    force_update: true
+  #  battery_level:
+  #    name: "Rommel Kamer Battery-Level ATC"
+  #    force_update: true
+  #  battery_voltage:
+  #    name: "Rommel Kamer Battery-Voltage ATC"
+  #    force_update: true

@@ -1,0 +1,31 @@
+google_home_resume_tts_screen:
+  alias: 00 🔊 Google Home Resume - Send TTS for Screen
+  description: Helper script to send a TTS with picture and text to a player with
+    screen
+  icon: mdi:cast-audio
+  mode: parallel
+  max: 20
+  sequence:
+  - wait_for_trigger:
+    - platform: event
+      event_type: call_service
+      event_data:
+        domain: media_player
+        service: play_media
+        service_data:
+          media_content_type: music
+          entity_id: '{{ [ dummy_player ] }}'
+  - alias: Send TTS message with picture
+    service: media_player.play_media
+    target: '{{ target }}'
+    data:
+      media_content_id: '{{ wait.trigger.event.data.service_data.media_content_id
+        }}'
+      media_content_type: music
+      extra:
+        metadata:
+          metadataType: 3
+          title: '{{ large_text }}'
+          artist: '{{ small_text }}'
+          images:
+          - url: '{{ picture_url }}'

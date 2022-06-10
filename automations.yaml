@@ -1,0 +1,1439 @@
+- id: badkamer_vochtigheid_hoog
+  alias: 01-03 🛁💨 Badkamer - Vochtigheid te hoog.
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.badkamer_vochtigheid
+    above: '95'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: f200dfde213645f7544e4dd27376a403
+    entity_id: switch.badkamer_ventilator
+    domain: switch
+  mode: single
+- id: badkamer_vochtigheid_laag
+  alias: 01-03 🛁💨 Badkamer - Vochtigheid te laag.
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.badkamer_vochtigheid
+    below: '94'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: f200dfde213645f7544e4dd27376a403
+    entity_id: switch.badkamer_ventilator
+    domain: switch
+  mode: single
+- id: buitenverlichting_zonsondergang
+  alias: 00-00 🏡💡Buitenverlichting - Zonsondergang
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 9c07a33be3fc5a2961cfc3ab46239cac
+    entity_id: switch.buitenverlichting_voor
+    domain: switch
+  mode: single
+- id: buitenverlichting_zonsopgang
+  alias: 00-00 🏡💡Buitenverlichting - Zonsopgang
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 9c07a33be3fc5a2961cfc3ab46239cac
+    entity_id: switch.buitenverlichting_voor
+    domain: switch
+  mode: single
+- id: deurbel_dier
+  alias: 00-01 🏠🔔Woonkamer - Deurbel Dier
+  description: ''
+  trigger:
+  - platform: event
+    event_type: button_pressed
+    event_data:
+      entity_id: switch.deurbel
+  action:
+  - service: script.turn_on
+    data:
+      entity_id: script.deurbel_dieren
+  mode: single
+- id: deurbel_extra_bel
+  alias: 01-00 🏠🔔Gang 1e Etage - Deurbel Extra Bel
+  description: ''
+  trigger:
+  - platform: event
+    event_type: button_pressed
+    event_data:
+      entity_id: switch.deurbel
+  condition:
+  - condition: sun
+    after: sunrise
+    before: sunset
+  action:
+  - service: script.turn_on
+    data:
+      entity_id: script.deurbel_stekker
+  mode: single
+- id: doorbell.ring_notify
+  alias: 00 🔊 Notification - Deurbel
+  trigger:
+  - platform: event
+    event_type: button_pressed
+    event_data:
+      entity_id: switch.deurbel
+  action:
+  - service: notify.telegram_thuis
+    data:
+      message: Er staat iemand voor de deur!
+  mode: single
+- id: telegram_backup_success
+  alias: 00 🔊 Notification - Backup Success
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.samba_backup
+    to: SUCCEEDED
+  condition: []
+  action:
+  - service: notify.telegram_paul
+    data:
+      message: "Backup has status {{ states('sensor.samba_backup') }} at {{ states('sensor.time')\
+        \ }} on {{ states('sensor.date') }}\n\nBackups Locally: {{ states.sensor.samba_backup.attributes.backups_local\
+        \ }} \nBackups Remote: {{ states.sensor.samba_backup.attributes.backups_remote\
+        \ }} \n\nTotal Backups Succeeded: {{  states.sensor.samba_backup.attributes.total_backups_succeeded\
+        \ }} \nTotal Backups Failed: {{  states.sensor.samba_backup.attributes.total_backups_failed\
+        \ }}"
+  mode: single
+- id: trapkast_switch
+  alias: 00-01 🏠🥫 Woonkamer - Trapkast Switch
+  description: ''
+  trigger:
+  - type: not_opened
+    platform: device
+    device_id: 9c4854b7aa77adf0a695699bc5b3cf6d
+    entity_id: binary_sensor.trapkast_deur_access_control_window_door_is_open
+    domain: binary_sensor
+  - type: opened
+    platform: device
+    device_id: 9c4854b7aa77adf0a695699bc5b3cf6d
+    entity_id: binary_sensor.trapkast_deur_access_control_window_door_is_open
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: toggle
+    device_id: 40f2254e59ec17235633fab3ff503787
+    entity_id: switch.trapkast_switch
+    domain: switch
+  mode: single
+- id: '1603203363087'
+  alias: 00 🔊 Notification - Backup Failure
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.samba_backup
+    to: FAILED
+  condition: []
+  action:
+  - service: notify.telegram_paul
+    data:
+      message: Backup has status {{ states('sensor.samba_backup') }} at {{ states('sensor.time')
+        }} on {{ states('sensor.date') }}
+  mode: single
+- id: '1603203808907'
+  alias: 00 🔊 Notification - Backup Started
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.samba_backup
+    to: RUNNING
+  condition: []
+  action:
+  - service: notify.telegram_paul
+    data:
+      message: Backup has status {{ states('sensor.samba_backup') }} at {{ states('sensor.time')
+        }} on {{ states('sensor.date') }}
+  mode: single
+- id: '1603204013326'
+  alias: 00 🔊 Notification - Backup Idle
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.samba_backup
+    to: IDLE
+  condition: []
+  action:
+  - service: notify.telegram_paul
+    data:
+      message: Backup has status {{ states('sensor.samba_backup') }} at {{ states('sensor.time')
+        }} on {{ states('sensor.date') }}
+  mode: single
+- id: '1603314420930'
+  alias: 00 💀 After-Reset - Samba Backup Restore Sensor
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: hassio.addon_stdin
+    data:
+      addon: 15d21743_samba_backup
+      input: restore-sensor
+  mode: single
+- id: '1603582556536'
+  alias: 00 🔊 Notification - HASS Started
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: notify.telegram_paul
+    data:
+      message: HASS Started!
+  mode: single
+- id: '1603927105215'
+  alias: 00 🔊Notification - Vuilnis Vandaag
+  description: ''
+  trigger:
+  - platform: time
+    at: '18:00:00'
+  condition:
+  - condition: template
+    value_template: '{% if not is_state(''sensor.purmerend_afval_vandaag'', ''Geen'')
+      %}true{% endif %}'
+  action:
+  - service: notify.telegram_thuis
+    data:
+      message: De {{ states('sensor.purmerend_afval_vandaag') }} bak mag weer naar
+        binnen!
+  - service: notify.whatsapp_paul
+    data:
+      message: De {{states('sensor.purmerend_afval_vandaag') }} bak mag weer naar
+        binnen!
+  - service: script.00_google_home_bak_binnen
+    data: {}
+  mode: single
+- id: '1604013044971'
+  alias: 00 🔊 Notification - Goedemorgen
+  trigger:
+  - platform: sun
+    event: sunrise
+  action:
+  - service: notify.telegram_thuis
+    data:
+      message: '*Goedemorgen!*
+
+        {% set days = ["Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag",
+        "Zondag"]  %}
+
+        Het is vandaag: *{{ days[now().weekday()] }} - {{ states(''sensor.date'')[0:].split(''-'')
+        | reverse | join(''-'') }}*
+
+
+        De zon is zojuist opgegaan om: *{{ as_timestamp(states.sun.sun.attributes.next_rising)
+        | timestamp_custom(''%H:%M'') }}*
+
+        De zon gaat onder om: *{{ as_timestamp(states.sun.sun.attributes.next_setting)
+        | timestamp_custom(''%H:%M'') }}*
+
+
+        Op dit moment is het buiten *{{ states(''sensor.buiten_temperatuur'') }} {{
+        state_attr(''sensor.buiten_temperatuur'', ''unit_of_measurement'') }}* met
+        een vochtigheid van *{{ states(''sensor.buiten_vochtigheid'') }} {{ state_attr(''sensor.buiten_vochtigheid'',
+        ''unit_of_measurement'') }}*
+
+
+        Het weerbericht voor vandaag:'
+  - service: telegram_bot.send_photo
+    data:
+      target: -417989501
+      disable_notification: true
+      file: /config/www/climacons/{{ states.sensor.dark_sky_weer_icon.state }}.png
+      caption: '{{ states.sensor.dark_sky_weer_summary.state }}'
+  - service: telegram_bot.send_message
+    data:
+      target: -417989501
+      disable_notification: true
+      message: '{{ states.sensor.dark_sky_weer_hourly_summary.state }} {{ states.sensor.dark_sky_weer_daily_summary.state
+        }}'
+  - service: notify.telegram_thuis
+    data:
+      message: 'Buienradar Snapshot:'
+  - service: telegram_bot.send_photo
+    data_template:
+      target: -417989501
+      disable_notification: true
+      url: https://image.buienradar.nl/2.0/image/single/RadarMapRainNL?height=256&width=256
+  mode: single
+- id: '1604100574417'
+  alias: 00 🔊 Notification - Fijne Avond
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - service: notify.telegram_thuis
+    data:
+      message: "*Fijne Avond en slaap lekker!*\n\n De zon is vannochtend opgegaan\
+        \ om: *{{\nas_timestamp(states.sun.sun.attributes.next_rising) | timestamp_custom('%H:%M')\
+        \ }}*\nDe zon is zojuist ondergegaan om: *{{ as_timestamp(states.sun.sun.attributes.next_setting)\
+        \ | timestamp_custom('%H:%M') }}*\n\nOp dit moment is het buiten *{{ states('sensor.buiten_temperatuur')\
+        \ }} {{ state_attr('sensor.buiten_temperatuur', 'unit_of_measurement') }}*\
+        \ met een vochtigheid van *{{ states('sensor.buiten_vochtigheid') }} {{ state_attr('sensor.buiten_vochtigheid',\
+        \ 'unit_of_measurement') }}*\n\nHet weerbericht voor vannacht:"
+  - service: telegram_bot.send_photo
+    data:
+      target: -417989501
+      disable_notification: true
+      file: /config/www/climacons/{{ states.sensor.dark_sky_weer_icon.state }}.png
+      caption: '{{ states.sensor.dark_sky_weer_summary.state }}'
+  - service: telegram_bot.send_message
+    data:
+      target: -417989501
+      disable_notification: true
+      message: '{{ states.sensor.dark_sky_weer_hourly_summary.state }} {{ states.sensor.dark_sky_weer_daily_summary.state
+        }}'
+  - service: notify.telegram_thuis
+    data:
+      message: 'Buienradar Snapshot:'
+  - service: telegram_bot.send_photo
+    data_template:
+      target: -417989501
+      disable_notification: true
+      url: https://image.buienradar.nl/2.0/image/single/RadarMapRainNL?height=256&width=256
+  mode: single
+- id: '1611230002008'
+  alias: 01-03 🛁📟 Badkamer - Ventilator Aan Knop
+  description: ''
+  trigger:
+  - platform: device
+    device_id: e3e6c623eaa28bcf20d8e18614a7cef0
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '001'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 001
+  condition: []
+  action:
+  - type: turn_on
+    device_id: f200dfde213645f7544e4dd27376a403
+    entity_id: switch.badkamer_ventilator
+    domain: switch
+  mode: single
+  initial_state: true
+- id: '1611230017874'
+  alias: 01-03 🛁📟 Badkamer - Ventilator Uit Knop
+  description: ''
+  trigger:
+  - platform: device
+    device_id: e3e6c623eaa28bcf20d8e18614a7cef0
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '002'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 002
+  condition: []
+  action:
+  - type: turn_off
+    device_id: f200dfde213645f7544e4dd27376a403
+    entity_id: switch.badkamer_ventilator
+    domain: switch
+  mode: single
+  initial_state: true
+- id: '1631051623076'
+  alias: 01-01 👨‍👩‍👦‍👦💡 Slaapkamer Jongens - Nachtlampje Ochtendgloren
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:00:00
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      rgbw_color:
+      - 255
+      - 0
+      - 0
+      - 0
+    target:
+      entity_id: light.nachtlampje_jongens
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      color_name: orange
+    target:
+      entity_id: light.nachtlampje_jongens
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      rgbw_color:
+      - 0
+      - 255
+      - 0
+      - 0
+    target:
+      entity_id: light.nachtlampje_jongens
+  mode: single
+- id: '1631052495478'
+  alias: 01-01 👨‍👩‍👦‍👦💡 Slaapkamer Jongens - Nachtlampje Avondstand
+  description: ''
+  trigger:
+  - platform: time
+    at: '19:00:00'
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      rgbw_color:
+      - 255
+      - 0
+      - 0
+      - 0
+    target:
+      entity_id: light.nachtlampje_jongens
+  mode: single
+- id: '1639821734412'
+  alias: 00-01 🏠📺 Woonkamer - TV Beneden Uit
+  description: ''
+  trigger:
+  - platform: time
+    at: 03:00
+  condition: []
+  action:
+  - type: turn_off
+    device_id: c6dfd481f27e20bf34d1ffb7a640e4ad
+    entity_id: switch.tv_beneden
+    domain: switch
+  mode: single
+- id: '1639821758641'
+  alias: 00-01 🏠📺 Woonkamer - TV Beneden Aan
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00
+  condition: []
+  action:
+  - type: turn_on
+    device_id: c6dfd481f27e20bf34d1ffb7a640e4ad
+    entity_id: switch.tv_beneden
+    domain: switch
+  mode: single
+- id: '1640474732715'
+  alias: 00 🔊 Notification - Growroom Cycle
+  description: ''
+  trigger:
+  - platform: time
+    at: input_datetime.growtent_sunrise
+  - platform: time
+    at: input_datetime.growtent_sunset
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
+  - service: notify.telegram_bud_hut
+    data:
+      message: '*Growtent Statistics*
+
+
+        De {{ states(''input_text.growtent_cycle_name'') }} Cycle is ingegaan:
+
+
+        Actieve Cycle: {{ states(''input_text.growtent_growschedule_status'') }}
+
+
+        Growtent Temperatuur: *{{ states(''sensor.growtent_temperature_atc'') }} {{
+        state_attr(''sensor.growtent_temperature_atc'', ''unit_of_measurement'') }}*
+
+        Growtent Vochtigheid: *{{ states(''sensor.growtent_humidity_atc'') }} {{ state_attr(''sensor.growtent_humidity_atc'',
+        ''unit_of_measurement'') }}*
+
+        Heating is: *{{ states(''switch.growtent_heating'') }}*
+
+        Heating override is: *{{ states(''input_boolean.growtent_heating_override'')
+        }}*'
+  - service: telegram_bot.send_photo
+    data_template:
+      target: -749748886
+      disable_notification: true
+      url: http://192.168.2.221/growtent_snapshot.jpg
+  mode: single
+- id: '1641510587657'
+  alias: 00 💀 After-Reset - Trapkast
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition:
+  - type: is_open
+    condition: device
+    device_id: 9c4854b7aa77adf0a695699bc5b3cf6d
+    entity_id: binary_sensor.trapkast_deur_access_control_window_door_is_open
+    domain: binary_sensor
+  action:
+  - type: turn_on
+    device_id: 40f2254e59ec17235633fab3ff503787
+    entity_id: switch.trapkast_switch
+    domain: switch
+  mode: single
+- id: '1641603877239'
+  alias: 00 🔊 Notification - Sproutbox Cycle
+  description: ''
+  trigger:
+  - platform: time
+    at: input_datetime.sproutbox_sunrise
+  - platform: time
+    at: input_datetime.sproutbox_sunset
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
+  - service: notify.telegram_bud_hut
+    data:
+      message: '*Sproutbox Statistics*
+
+
+        De *{{ states(''input_text.sproutbox_cycle_name'') }}* Cycle is ingegaan:
+
+
+        Actieve Cycle: *{{ states(''input_text.sproutbox_growschedule_status'') }}*
+
+
+        Growtent Temperatuur: *{{ states(''sensor.sproutbox_temperature'') }} {{ state_attr(''sensor.sproutbox_temperature'',
+        ''unit_of_measurement'') }}*
+
+        Growtent Vochtigheid: *{{ states(''sensor.sproutbox_humidity'') }} {{ state_attr(''sensor.sproutbox_humidity'',
+        ''unit_of_measurement'') }}*
+
+        Heating is: *{{ states(''switch.sproutbox_heating'') }}*
+
+        Heating override is: *{{ states(''input_boolean.sproutbox_heating_override'')
+        }}*'
+  - service: telegram_bot.send_photo
+    data_template:
+      target: -749748886
+      disable_notification: true
+      url: http://192.168.2.221/sproutbox_snapshot.jpg
+  mode: single
+- id: '1643898857656'
+  alias: 01-01 👨‍👩‍👦‍👦💡 Slaapkamer Jongens - Minecraft Torches Automation On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.minecraft_torches
+    to: 'on'
+  condition: []
+  action:
+  - service: light.turn_on
+    target:
+      entity_id:
+      - light.minecraft_torch_1
+      - light.minecraft_torch_2
+      - light.minecraft_torch_3
+      - light.minecraft_torch_4
+    data:
+      effect: Fire
+      color_name: orange
+  mode: single
+- id: '1643898947665'
+  alias: 01-01 👨‍👩‍👦‍👦💡 Slaapkamer Jongens - Minecraft Torches Automation Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.minecraft_torches
+    to: 'off'
+  condition: []
+  action:
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.minecraft_torch_1
+      - light.minecraft_torch_2
+      - light.minecraft_torch_3
+      - light.minecraft_torch_4
+    data: {}
+  mode: single
+- id: '1646004374635'
+  alias: 00-01 🏠💡Woonkamer - Lichten Uit Scripts
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: scene.licht_uit
+  condition: []
+  action:
+  - service: script.slapengaan
+    data: {}
+  mode: single
+- id: '1646317804314'
+  alias: 03-01 🥦 💨 Growroom - Afzuiging Switch Buiten Open
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.growroom_afzuiging_buiten
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.binnen_lucht
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.buiten_lucht
+  mode: single
+- id: '1646317828271'
+  alias: 03-01 🥦 💨 Growroom - Afzuiging Switch Buiten Dicht
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.growroom_afzuiging_buiten
+    to: 'off'
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.binnen_lucht
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.buiten_lucht
+  mode: single
+- id: '1648723304047'
+  alias: 03-00 🛖 Vliering - Luik Switch
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: c0c92985b012807d747a8d79ae19fad3
+    entity_id: binary_sensor.vliering_luik_door
+    domain: binary_sensor
+  - type: not_opened
+    platform: device
+    device_id: c0c92985b012807d747a8d79ae19fad3
+    entity_id: binary_sensor.vliering_luik_door
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: toggle
+    device_id: 87f6b50459afb05c53dd9a8dd228dca7
+    entity_id: switch.vliering_licht
+    domain: switch
+  mode: single
+- id: '1649428867664'
+  alias: 00 🔊🔋Notification - Low Level Batteries for all Sensors
+  description: ''
+  use_blueprint:
+    path: paul/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      actions:
+      - service: notify.telegram_paul
+        data:
+          message: The battery of the sensor(s) {{sensors}} is low.
+- id: '1649428867245'
+  alias: 00 🔊 Notification - Vuilnis Morgen
+  description: ''
+  trigger:
+  - platform: time
+    at: '18:00:00'
+  condition:
+  - condition: template
+    value_template: '{% if not is_state(''sensor.purmerend_afval_morgen'', ''Geen'')
+      %}true{% endif %}'
+  action:
+  - service: notify.telegram_thuis
+    data:
+      message: De {{ states('sensor.purmerend_afval_morgen') }} bak moet naar buiten
+        vanavond!
+  - service: notify.whatsapp_paul
+    data:
+      message: De {{ states('sensor.purmerend_afval_morgen') }} bak moet naar buiten
+        vanavond!
+  - service: script.00_google_home_bak_buiten
+    data: {}
+  mode: single
+- id: '1650477274390'
+  alias: 00 🔊 Notification - Updates
+  description: ''
+  use_blueprint:
+    path: paul/update_notifications.yaml
+    input:
+      reminder_hours: '3'
+      update_entities:
+      - update.home_assistant_core_update
+      - update.home_assistant_operating_system_update
+      - update.home_assistant_supervisor_update
+      mobile_app_device: eb22c550194010cce4c27a3b045050c1
+      mobile_app_device_2: 3df3d24cd9c89a1cfeba531b1cee16d0
+      send_to_ha: true
+- id: '1650479473322'
+  alias: 00-00 🏡☀️ Tuin - Zonnescherm Check
+  description: ''
+  use_blueprint:
+    path: paul/actionable-notifications-for-android.yaml
+    input:
+      notify_device: eb22c550194010cce4c27a3b045050c1
+      trigger_entity: input_boolean.zonnescherm
+      notification_title: Zonnescherm Open
+      notification_message: Het zonnescherm staat nog open, de zon is al onder, wat
+        wil je doen?
+      action_1_title: Open laten
+      first_action: []
+      action_2_title: Dicht doen
+      action_3_title: Suspend
+      second_action:
+      - device_id: 8d2c6e3a1e85799e8ed1059c4d04e883
+        domain: cover
+        entity_id: cover.zonnescherm
+        type: set_position
+        position: 0
+- id: '1650479819814'
+  alias: 00-00 🏡☀️ Tuin - Zonnescherm Zonsondergang
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition:
+  - condition: device
+    device_id: 8d2c6e3a1e85799e8ed1059c4d04e883
+    domain: cover
+    entity_id: cover.zonnescherm
+    type: is_open
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.zonnescherm
+  mode: single
+- id: '1650802905085'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 5 - Leeslampje Rik
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 5
+      button_pressed_actions:
+      - service: light.turn_on
+        data:
+          rgbw_color:
+          - 255
+          - 255
+          - 255
+          - 255
+        target:
+          entity_id: light.minecraft_torch_3
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.minecraft_torch_3
+- id: '1650803231061'
+  alias: 02-01 👨‍👩‍👦‍👦📟 Slaapkamer - ZWave Switch Bed Button 1 - Hoofdlicht Aan
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 3eb37617b51685daf74c4c56ed8cc7f3
+      button_selector: 1
+      button_pressed_actions:
+      - type: turn_on
+        device_id: 2c4006652dbd47f18be57aa33e932fec
+        entity_id: light.slaapkamer_dimmer
+        domain: light
+      button_hold_actions: []
+- id: '1650803320550'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 7 - Torches
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 7
+      button_pressed_actions:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.minecraft_torches
+      button_hold_actions:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.minecraft_torches
+- id: '1650832194366'
+  alias: 01-03 🛁💨 Badkamer - Vochtigheid
+  description: ''
+  use_blueprint:
+    path: paul/turn-a-fan-on-and-off-based-on-the-difference-between-a-humidity-sensor-and-a-baseline.yaml
+    input:
+      humidity_sensor: sensor.badkamer_vochtigheid
+      reference_humidity_sensor: sensor.woonkamer_vochtigheid
+      fan_switch: switch.badkamer_ventilator
+- id: '1651490341612'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 3 - Nachtlampje
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 3
+      button_pressed_actions:
+      - service: light.turn_on
+        data:
+          rgbw_color:
+          - 255
+          - 0
+          - 0
+          - 0
+        target:
+          entity_id: light.nachtlampje_jongens
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.nachtlampje_jongens
+- id: '1651584547484'
+  alias: 00-01 🏠📟 Woonkamer - Uitbouw Schakelaar 3 - Kromme Lamp
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: d9f476283c0ab6a96c67ce3d17fc11d2
+      button_selector: 3
+      button_pressed_actions:
+      - type: turn_on
+        device_id: 81d957aa0cac53a24a27b21008e2969d
+        entity_id: light.kromme_lamp
+        domain: light
+      button_hold_actions:
+      - type: turn_off
+        device_id: 81d957aa0cac53a24a27b21008e2969d
+        entity_id: light.kromme_lamp
+        domain: light
+- id: '1651584759049'
+  alias: 00-01 🏠📟 Woonkamer - Uitbouw Schakelaar 5 - Staande Lamp
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: d9f476283c0ab6a96c67ce3d17fc11d2
+      button_selector: 5
+      button_pressed_actions:
+      - type: turn_on
+        device_id: 42d8a1648923bcb35efb377d76f164bb
+        entity_id: light.staande_lamp_bank
+        domain: light
+      button_hold_actions:
+      - type: turn_off
+        device_id: 42d8a1648923bcb35efb377d76f164bb
+        entity_id: light.staande_lamp_bank
+        domain: light
+- id: '1651584826808'
+  alias: 00-01 🏠📟 Woonkamer - Uitbouw Schakelaar 7 - Dierendeurbel
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: d9f476283c0ab6a96c67ce3d17fc11d2
+      button_selector: 7
+      button_pressed_actions:
+      - service: script.deurbel_dieren
+        data: {}
+      button_hold_actions: []
+- id: '1651585115150'
+  alias: 00-01 🏠📟 Woonkamer - Uitbouw Schakelaar 4 - Seleniet Lamp
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: d9f476283c0ab6a96c67ce3d17fc11d2
+      button_selector: 4
+      button_pressed_actions:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.seleniet
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.seleniet
+- id: '1651585131240'
+  alias: 00-01 🏠📟 Woonkamer - Uitbouw Schakelaar 6 - Speelgoedkast Lamp
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: d9f476283c0ab6a96c67ce3d17fc11d2
+      button_selector: 6
+      button_pressed_actions:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.speelgoedkast_lamp
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.speelgoedkast_lamp
+- id: '1651585243320'
+  alias: 00-01 🏠📟 Woonkamer - Uitbouw Schakelaar 8 - Comfort, Eten en Uit
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: d9f476283c0ab6a96c67ce3d17fc11d2
+      button_selector: 8
+      button_pressed_actions:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.comfort
+        metadata: {}
+      button_hold_actions:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.licht_uit
+        metadata: {}
+      button_release_actions:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.eten
+        metadata: {}
+- id: '1651586255869'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 2 - Hoofdlicht (Rood)
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 2
+      button_pressed_actions:
+      - service: light.turn_on
+        data:
+          rgbw_color:
+          - 255
+          - 0
+          - 0
+          - 0
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+- id: '1651586289045'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 4 - Hoofdlicht (Groen)
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 4
+      button_pressed_actions:
+      - service: light.turn_on
+        data:
+          rgbw_color:
+          - 0
+          - 255
+          - 0
+          - 0
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+- id: '1651586312310'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 6 - Hoofdlicht (Blauw)
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 6
+      button_pressed_actions:
+      - service: light.turn_on
+        data:
+          rgbw_color:
+          - 0
+          - 0
+          - 255
+          - 0
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+- id: '1651586348921'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 8 - Hoofdlicht (Regenboog)
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 8
+      button_pressed_actions:
+      - service: light.turn_on
+        data:
+          effect: Rainbow
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+      button_release_actions:
+      - service: light.turn_on
+        data:
+          effect: Random Twinkle
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+- id: '1653211325277'
+  alias: 04-00 💻 Testing - Beide Weg
+  description: ''
+  use_blueprint:
+    path: paul/actionable-notifications-for-android.yaml
+    input:
+      notify_device: eb22c550194010cce4c27a3b045050c1
+      trigger_entity: input_boolean.beide_weg
+      persistent_notification: true
+      action_1_title: Alarm
+      action_2_title: Oppas
+      action_3_title: Niks
+      notification_title: Geen baasjes?
+      notification_message: Alarm, Oppas, Vakantie? Waar zijn jullie???
+      first_action:
+      - service: alarm_control_panel.alarm_arm_away
+        data:
+          code: '6007'
+        target:
+          entity_id: alarm_control_panel.jarvis_alarm
+      second_action:
+      - service: alarm_control_panel.alarm_disarm
+        data:
+          code: '6007'
+        target:
+          entity_id: alarm_control_panel.jarvis_alarm
+- id: '1653211561831'
+  alias: 04-00 💻 Testing - Beide Weg Toggle
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.paul
+    zone: zone.home
+    event: leave
+  - platform: zone
+    entity_id: person.irene
+    zone: zone.home
+    event: leave
+  condition:
+  - condition: state
+    entity_id: input_boolean.beide_weg
+    state: 'off'
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: person.paul
+      state: not_home
+    - condition: state
+      entity_id: person.irene
+      state: not_home
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.beide_weg
+  - service: notify.telegram_thuis
+    data:
+      message: boolean beide weg toggle aan
+  mode: single
+- id: '1653211891769'
+  alias: '00 🔊 Notification: House Arming'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - alarm_control_panel.jarvis_alarm
+    to: armed_away
+  condition: []
+  action:
+  - service: notify.telegram_paul
+    data:
+      message: Jarvis Armed
+  mode: single
+- id: '1653212187963'
+  alias: '00 🔊 Notification: House Disarmed'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - alarm_control_panel.jarvis_alarm
+    to: disarmed
+  condition: []
+  action:
+  - service: notify.telegram_paul
+    data:
+      message: Jarvis Disarmed
+  mode: single
+- id: '1653213700750'
+  alias: 04-01 💻 Testing - Tag Paul Linkerhand is scanned
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 04-B7-A3-D2-CD-52-80
+  condition: []
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    data:
+      code: '6007'
+    target:
+      entity_id: alarm_control_panel.jarvis_alarm
+  mode: single
+- id: '1653261014282'
+  alias: 00 🔊 Notification - Paul Thuis
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.paul
+      zone_entity: zone.home
+      notify_device: eb22c550194010cce4c27a3b045050c1
+- id: '1653261089749'
+  alias: 00 🔊 Notification - Paul Zaak
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.paul
+      zone_entity: zone.praktijk
+      notify_device: eb22c550194010cce4c27a3b045050c1
+- id: '1653261119555'
+  alias: 00 🔊 Notification - Irene Thuis
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.irene
+      zone_entity: zone.home
+      notify_device: eb22c550194010cce4c27a3b045050c1
+- id: '1654112226200'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - Rode Button - Toggle Nachtlampje
+  description: ''
+  trigger:
+  - platform: device
+    device_id: f2e61f11b08379ac2b0c4a0486d1d06c
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '001'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 001
+  condition: []
+  action:
+  - service: light.toggle
+    data:
+      white_value: 255
+      brightness: 255
+    target:
+      entity_id: light.minecraft_torch_3
+  mode: single
+- id: '1654161072520'
+  alias: 01-00 🛁📟 Gang 1e Etage - Zolder Verlichting Aan
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 3fe25508074cd9b16385de3b9589be8a
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '001'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 001
+  condition: []
+  action:
+  - type: turn_on
+    device_id: a72e20110f19701237d96002e4f3e75e
+    entity_id: switch.overloop_zolder_licht
+    domain: switch
+  mode: single
+  initial_state: true
+- id: '1654161091870'
+  alias: 01-00 🛁📟 Gang 1e Etage - Zolder Verlichting Uit
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 3fe25508074cd9b16385de3b9589be8a
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '002'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 002
+  condition: []
+  action:
+  - type: turn_off
+    device_id: a72e20110f19701237d96002e4f3e75e
+    entity_id: switch.overloop_zolder_licht
+    domain: switch
+  mode: single
+  initial_state: true
+- id: '1654161474361'
+  alias: 02-00 🏠📟 Gang Zolder - Knop 1
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 4af2f4fe929161fdc6c75d49aa1e33cf
+      button_pressed_actions:
+      - type: turn_on
+        device_id: a72e20110f19701237d96002e4f3e75e
+        entity_id: switch.overloop_zolder_licht
+        domain: switch
+- id: '1654161484661'
+  alias: 02-00 🏠📟 Gang Zolder - Knop 2
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 4af2f4fe929161fdc6c75d49aa1e33cf
+      button_pressed_actions:
+      - type: turn_off
+        device_id: a72e20110f19701237d96002e4f3e75e
+        entity_id: switch.overloop_zolder_licht
+        domain: switch
+      button_selector: 2
+- id: '1654162173113'
+  alias: 02-01 👨‍👩‍👦‍👦📟 Slaapkamer - ZWave Switch Bed Button 2 - Hoofdlicht Uit
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 3eb37617b51685daf74c4c56ed8cc7f3
+      button_selector: 2
+      button_pressed_actions:
+      - type: turn_off
+        device_id: 2c4006652dbd47f18be57aa33e932fec
+        entity_id: light.slaapkamer_dimmer
+        domain: light
+      button_hold_actions: []
+- id: '1654162194991'
+  alias: 02-01 👨‍👩‍👦‍👦📟 Slaapkamer - ZWave Switch Bed Button 3 - Ganglicht Aan
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 3eb37617b51685daf74c4c56ed8cc7f3
+      button_selector: 3
+      button_pressed_actions:
+      - type: turn_on
+        device_id: a72e20110f19701237d96002e4f3e75e
+        entity_id: switch.overloop_zolder_licht
+        domain: switch
+      button_hold_actions: []
+- id: '1654162211184'
+  alias: 02-01 👨‍👩‍👦‍👦📟 Slaapkamer - ZWave Switch Bed Button 4 - Ganglicht Uit
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 3eb37617b51685daf74c4c56ed8cc7f3
+      button_selector: 4
+      button_pressed_actions:
+      - type: turn_off
+        device_id: a72e20110f19701237d96002e4f3e75e
+        entity_id: switch.overloop_zolder_licht
+        domain: switch
+      button_hold_actions: []
+- id: '1654524948460'
+  alias: 01-01 👨‍👩‍👦‍👦📟 Slaapkamer Jongens - ZWave Switch Button 1 - Hoofdlicht (Wit)
+  description: ''
+  use_blueprint:
+    path: paul/zwavejs-heatit-z-push-button-8-scene-controller.yaml
+    input:
+      zwavejs_device: 889b6f3302dddd90a378c549b9f6a532
+      button_selector: 1
+      button_pressed_actions:
+      - service: light.turn_on
+        data:
+          rgbw_color:
+          - 0
+          - 0
+          - 0
+          - 255
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+      button_hold_actions:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.slaapkamer_jongens_hoofdlicht
+- id: '1654543173930'
+  alias: 04-00 💻 Testing - Paul Send actionable notifications when entering a zone
+    for Android (Weg)
+  description: ''
+  use_blueprint:
+    path: paul/actionable-notifications-for-android-when-entering-or-leaving-a-zone.yaml
+    input:
+      notify_device: eb22c550194010cce4c27a3b045050c1
+      trigger_entity: person.paul
+      trigger_event: leave
+      trigger_zone: zone.home
+      notification_title: Paul Weg
+      notification_message: Paul Weg Message
+- id: '1654669859669'
+  alias: 04-00 💻 Testing - Paul Send actionable notifications when entering a zone
+    for Android (Thuis)
+  description: ''
+  use_blueprint:
+    path: paul/actionable-notifications-for-android-when-entering-or-leaving-a-zone.yaml
+    input:
+      notify_device: eb22c550194010cce4c27a3b045050c1
+      trigger_entity: person.paul
+      trigger_event: enter
+      trigger_zone: zone.home
+      notification_title: Paul Thuis
+      notification_message: Paul Thuis Message
+- id: '1654669886127'
+  alias: 04-00 💻 Testing - Irene Send actionable notifications when entering a zone
+    for Android (Thuis)
+  description: ''
+  use_blueprint:
+    path: paul/actionable-notifications-for-android-when-entering-or-leaving-a-zone.yaml
+    input:
+      notify_device: eb22c550194010cce4c27a3b045050c1
+      trigger_entity: person.irene
+      trigger_event: enter
+      trigger_zone: zone.home
+      notification_title: Irene Thuis
+      notification_message: Irene Thuis Message
+- id: '1654670439209'
+  alias: 04-00 💻 Testing - Paul Send actionable notifications when entering a zone
+    for Android (Weg) (Duplicate)
+  description: ''
+  use_blueprint:
+    path: paul/actionable-notifications-for-android-when-entering-or-leaving-a-zone.yaml
+    input:
+      notify_device: eb22c550194010cce4c27a3b045050c1
+      trigger_entity: person.irene
+      trigger_event: leave
+      trigger_zone: zone.home
+      notification_title: Irene Weg
+      notification_message: Irene Weg Message
+- id: '1654677674739'
+  alias: 04-00 💻 Testing - Een van ons thuis
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.paul
+    zone: zone.home
+    event: enter
+  - platform: zone
+    entity_id: person.irene
+    zone: zone.home
+    event: enter
+  condition:
+  - condition: state
+    entity_id: input_boolean.beide_weg
+    state: 'on'
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.beide_weg
+  - service: notify.telegram_thuis
+    data:
+      message: boolean beide weg toggle uit
+  mode: single
+- id: '1654716642812'
+  alias: 00-00 🏡🍟Schuur - Frituurpan
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: 60314b551090d65137676c7a5497ed1e
+    entity_id: switch.frituurpan
+    domain: switch
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 60314b551090d65137676c7a5497ed1e
+    entity_id: switch.frituurpan
+    domain: switch
+  mode: single
+- id: '1654811366443'
+  alias: 00 🏡💡Huis - Huis Uit Workaround Scene
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - scene.hele_huis_uit
+  condition: []
+  action:
+  - service: script.00_huis_uit
+    data: {}
+  mode: single
+- id: '1654811535528'
+  alias: 00 🏡💡 Huis - Huis Aan Workaround Scene
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - scene.new_scene
+  condition: []
+  action:
+  - service: script.00_huis_aan
+    data: {}
+  mode: single
+- id: '1654811774391'
+  alias: 00 🏡💡 Huis - Disco Started Workaround Scene
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - scene.disco
+  condition: []
+  action:
+  - service: script.00_01_woonkamer_disco_started
+    data: {}
+  mode: single

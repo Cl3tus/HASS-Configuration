@@ -1,0 +1,3 @@
+#- platform: wake_on_lan
+#  name: Slaapkamer NUC  
+#  mac: 94:C6:91:17:B7:5C

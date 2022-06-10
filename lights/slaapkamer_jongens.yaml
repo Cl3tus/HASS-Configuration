@@ -1,0 +1,14 @@
+- platform: group
+  name: Slaapkamer Jongens Hoofdlicht
+  unique_id: light.slaapkamer_jongens_hoofdlicht
+  entities:
+    - light.slaapkamer_jongens_hoofdlicht_1
+    - light.slaapkamer_jongens_hoofdlicht_2
+- platform: group  
+  name: Minecraft Torches
+  unique_id: light.minecraft_torches
+  entities:
+    - light.minecraft_torch_1
+    - light.minecraft_torch_2
+    - light.minecraft_torch_3
+    - light.minecraft_torch_4

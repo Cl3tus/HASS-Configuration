@@ -1,0 +1,15 @@
+#
+#lovelace-staging: # Needs to contain a hyphen (-)
+#  mode: yaml
+#  filename: /config/ui/ui-staging.yaml
+#  title: Staging
+#  icon: mdi:tools
+#  show_in_sidebar: true
+#  require_admin: true
+#lovelace-hidden: # Needs to contain a hyphen (-)
+#  mode: yaml
+#  filename: /config/ui/ui-testing.yaml
+#  title: Testing YAML
+#  icon: mdi:test-tube
+#  show_in_sidebar: true
+#  require_admin: true

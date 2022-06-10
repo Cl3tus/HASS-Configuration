@@ -1,0 +1,94 @@
+google_home_resume_restore_non_playing:
+  alias: 00 🔊 Google Home Resume - Restore non playing
+  description: Helper script to restore non playing entities for the Google Home Resume
+    script
+  icon: mdi:cast-audio
+  mode: parallel
+  sequence:
+  - alias: State changed since script started?
+    wait_template: "{{\n  event_script or\n  (\n    (states[player.entity_id].last_changed\
+      \ > as_datetime(start_time))\n    and expand([player.entity_id] + player.members)\n\
+      \          | selectattr('state', 'eq', 'playing')\n          | list | count\
+      \ > 0\n  )\n}}\n"
+    timeout: 00:00:30
+  - alias: Wait until entity and members are not playing
+    wait_template: "{{\n  expand([player.entity_id] + player.members)\n          |\
+      \ selectattr('state', 'eq', 'playing')\n          | list | count == 0\n}}\n"
+  - alias: Google Home with screen back to idle screen
+    choose:
+    - conditions: '{{ player.type == ''screen'' }}'
+      sequence:
+      - alias: Turn Google Home off to return to idle mode (photo display)
+        service: media_player.turn_off
+        target:
+          entity_id: '{{ player.entity_id }}'
+  - alias: Set volume to old volume if needed
+    choose:
+    - conditions:
+      - alias: Volume restore needed
+        condition: template
+        value_template: "{{\n  player.volume_level | round(2, default=0)\n  != state_attr(player.entity_id,\
+          \ 'volume_level') | round(2, default=0)\n}}\n"
+      sequence:
+      - alias: Player is group?
+        choose:
+        - conditions: '{{ player.type == ''group'' }}'
+          sequence:
+          - alias: Restore volume of members
+            repeat:
+              count: '{{ player.members | count }}'
+              sequence:
+              - alias: Set volume back to old state
+                service: media_player.volume_set
+                target:
+                  entity_id: '{{ player.members[repeat.index -1] }}'
+                data:
+                  volume_level: "{{\n  member_data\n    | selectattr('entity_id',\
+                    \ 'eq', player.members[repeat.index-1])\n    | map(attribute='volume_level')\n\
+                    \    | join\n}}\n"
+        default:
+        - alias: Set volume back to old state
+          service: media_player.volume_set
+          target:
+            entity_id: '{{ player.entity_id }}'
+          data:
+            volume_level: '{{ player.volume_level }}'
+  - alias: Check if resume_action_false group exists
+    choose:
+    - conditions: "{{ \n  integration_entities('group')\n    | select('search', 'resume_action_false_ghresume'\
+        \ ~ context.id)\n    | list\n    | count > 0\n}}\n"
+      sequence:
+      - alias: Remove entity from group
+        service: group.set
+        data:
+          object_id: resume_action_false_ghresume_{{ context.id }}
+          name: Entities with actions which should not be resumed
+          icon: mdi:alert-octagon
+          entities: '{%- set current = state_attr(''resume_action_false_ghresume_''
+            ~ context.id, ''entity_id'') %} {{ iif(current == none, [], current) |
+            reject(''eq'', player.entity_id) | list }}
+
+            '
+  - alias: Remove entity from group
+    service: group.set
+    data:
+      object_id: resume_active_ghresume_{{ context.id }}
+      name: Entities currently active with Google Home Resume script
+      icon: mdi:autorenew
+      entities: '{%- set current = state_attr(''group.resume_active'', ''entity_id'')
+        %} {{ iif(current == none, [], current) | reject(''eq'', player.entity_id)
+        | list }}
+
+        '
+  - alias: Remove entity from group
+    service: group.set
+    data:
+      object_id: resume_script_active_ghresume_{{ context.id }}
+      name: Entities currently active with Google Home Resume script
+      icon: mdi:play-box
+      entities: '{%- set current = state_attr(''group.resume_active'', ''entity_id'')
+        %} {{ iif(current == none, [], current) | reject(''eq'', player.entity_id)
+        | list }}
+
+        '
+

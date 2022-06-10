@@ -1,0 +1,240 @@
+esphome:
+  name: growroom-ble
+  comment: Growroom Bluetooth Hub
+
+esp32:
+  board: esp32dev
+  #restore_from_flash: true
+
+#preferences:
+  #flash_write_interval: 1min
+
+# Enable logging
+logger:
+#    level: VERY_VERBOSE
+    
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Growroom Sensor"
+    password: !secret pb_std_pass
+
+captive_portal:
+
+# Timesync with home
+time:
+  - platform: homeassistant
+
+# Variables
+substitutions:
+  name: growroom-ble
+  friendly_name: "Growroom BLE Hub"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+# BLE Tracker
+esp32_ble_tracker:
+
+# Growroom BLE Gateway
+sensor:
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:3D:A9:5F"
+    temperature:
+      name: "Growtent Temperature ATC"
+      force_update: true
+    humidity:
+      name: "Growtent Humidity ATC"
+      force_update: true
+    battery_level:
+      name: "Growtent Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Growtent Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:C9:23:20"
+    temperature:
+      name: "Sproutbox Temperature"
+      force_update: true
+    humidity:
+      name: "Sproutbox Humidity"
+      force_update: true
+    battery_level:
+      name: "Sproutbox Battery Level"
+      force_update: true
+    battery_voltage:
+      name: "Sproutbox Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:8C:63:A5"
+    temperature:
+      name: "Weckpot 1 Temperature"
+      force_update: true
+    humidity:
+      name: "Weckpot 1 Humidity"
+      force_update: true
+    battery_level:
+      name: "Weckpot 1 Battery Level"
+      force_update: true
+    battery_voltage:
+      name: "Weckpot 1 Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:4C:89:2A"
+    temperature:
+      name: "Afzuiging Binnen Intake Temperatuur ATC"
+      force_update: true
+    humidity:
+      name: "Afzuiging Binnen Intake Vochtigheid ATC"
+      force_update: true
+    battery_level:
+      name: "Afzuiging Binnen Intake Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Afzuiging Binnen Intake Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:35:DB:00"
+    temperature:
+      name: "Afzuiging Buiten Intake Temperatuur ATC"
+      force_update: true
+    humidity:
+      name: "Afzuiging Buiten Intake Vochtigheid ATC"
+      force_update: true
+    battery_level:
+      name: "Afzuiging Buiten Intake Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Afzuiging Buiten Intake Battery-Voltage ATC"
+      force_update: true  
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:C3:9D:4A" #IJK Meter (Rommelkamer)
+    temperature:
+      name: "Growroom 1 Temperatuur ATC"
+      force_update: true
+    humidity:
+      name: "Growroom 1 Vochtigheid ATC"
+      force_update: true
+    battery_level:
+      name: "Growroom 1 Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Growroom 1 Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:FA:8A:D9" #Computerkamer
+    temperature:
+      name: "Growroom 2 Temperatuur ATC"
+      force_update: true
+    humidity:
+      name: "Growroom 2 Vochtigheid ATC"
+      force_update: true
+    battery_level:
+      name: "Growroom 2 Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Growroom 2 Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:27:BB:93"
+    temperature:
+      name: "Weckpot 2 Temperatuur ATC"
+      force_update: true
+    humidity:
+       name: "Weckpot 2 Vochtigheid ATC"
+       force_update: true
+    battery_level:
+      name: "Weckpot 2 Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Weckpot 2 Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:DD:0B:A0"
+    temperature:
+      name: "Weckpot 3 Temperatuur ATC"
+      force_update: true
+    humidity:
+      name: "Weckpot 3 Vochtigheid ATC"
+      force_update: true
+    battery_level:
+      name: "Weckpot 3 Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Weckpot 3 Battery-Voltage ATC"
+      force_update: true  
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:B6:E3:BA"
+    temperature:
+      name: "Weckpot 4 Temperatuur ATC"
+      force_update: true
+    humidity:
+       name: "Weckpot 4 Vochtigheid ATC"
+       force_update: true
+    battery_level:
+      name: "Weckpot 4 Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Weckpot 4 Battery-Voltage ATC"
+      force_update: true
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:57:F1:26"
+    temperature:
+      name: "Tent Intake Temperatuur ATC"
+      force_update: true
+    humidity:
+      name: "Tent Intake Vochtigheid ATC"
+      force_update: true
+    battery_level:
+      name: "Tent Intake Battery-Level ATC"
+      force_update: true
+    battery_voltage:
+      name: "Tent Intake Battery-Voltage ATC"
+      force_update: true
+  - platform: xiaomi_hhccjcy01
+    mac_address: C4:7C:8D:6B:C2:A1
+    temperature:
+      name: "Growroom Rosanne 1 Temperature"
+      force_update: true
+    moisture:
+      name: "Growroom Rosanne 1 Moisture"
+      force_update: true
+    illuminance:
+      name: "Growroom Rosanne 1 Illuminance"
+      force_update: true
+    conductivity:
+      name: "Growroom Rosanne 1 Soil Conductivity"
+      force_update: true
+    battery_level:
+      name: "Growroom Rosanne 1 Battery Level"
+      force_update: true

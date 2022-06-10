@@ -1,0 +1,10 @@
+#- platform: generic
+#  still_image_url: http://192.168.2.220:8888/out.jpg
+#  stream_source: http://192.168.2.220:8081/video.mjpg
+#  name: Woonkamer
+- platform: ffmpeg
+  input: !secret growtent_rtsp
+  name: Growtent
+- platform: ffmpeg
+  input: !secret sproutbox_rtsp
+  name: Sproutbox

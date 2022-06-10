@@ -1,0 +1,7 @@
+# Extra sensors for time and date
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'beat'

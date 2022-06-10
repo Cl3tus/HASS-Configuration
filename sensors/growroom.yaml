@@ -1,0 +1,57 @@
+- platform: template
+  sensors:
+    rosanne_1_ppm:
+      unit_of_measurement: "ppm"
+      value_template: "{{ (states('sensor.growroom_rosanne_1_soil_conductivity') | float * 0.64 | float) | round  }}"
+- platform: template
+  sensors:
+    sproutbox_night_hours_rounded:
+      friendly_name: "Night"
+      unit_of_measurement: "Hours"
+      value_template: "{{ (states('input_number.sproutbox_night_hours') | float) | round  }}"
+      icon_template: "mdi:weather-night"
+- platform: template
+  sensors:
+    sproutbox_day_hours_rounded:
+      friendly_name: "Day"
+      unit_of_measurement: "Hours"
+      value_template: "{{ (states('input_number.sproutbox_day_hours') | float) | round  }}"
+      icon_template: "mdi:white-balance-sunny"
+- platform: template
+  sensors:
+    growtent_night_hours_rounded:
+      friendly_name: "Night"
+      unit_of_measurement: "Hours"
+      value_template: "{{ (states('input_number.growtent_night_hours') | float) | round  }}"
+      icon_template: "mdi:weather-night"
+- platform: template
+  sensors:
+    growtent_day_hours_rounded:
+      friendly_name: "Day"
+      unit_of_measurement: "Hours"
+      value_template: "{{ (states('input_number.growtent_day_hours') | float) | round  }}"
+      icon_template: "mdi:white-balance-sunny"
+- platform: template
+  sensors:
+    growtent_vapor_deficit:
+      friendly_name: 'VPD in Kilo Pascal of Growtent'
+      value_template: >-
+        {% set T = ((states('sensor.growtent_temperature_atc') | float)) %}
+        {% set RH = states('sensor.growtent_humidity_atc')|float %}
+        {% set SVP = 0.61078 * e ** (17.2694 * T / (T + 238.3)) %}
+        {% set VPD = ((100-RH) / 100) * SVP %}
+        {{-VPD | round(2) -}}
+      unit_of_measurement: 'kPa'
+      icon_template: "mdi:gauge"
+- platform: template
+  sensors:
+    sproutbox_vapor_deficit:
+      friendly_name: 'VPD in Kilo Pascal of Sproutbox'
+      value_template: >-
+        {% set T = ((states('sensor.sproutbox_temperature') | float)) %}
+        {% set RH = states('sensor.sproutbox_humidity')|float %}
+        {% set SVP = 0.61078 * e ** (17.2694 * T / (T + 238.3)) %}
+        {% set VPD = ((100-RH) / 100) * SVP %}
+        {{-VPD | round(2) -}}
+      unit_of_measurement: 'kPa'
+      icon_template: "mdi:gauge"

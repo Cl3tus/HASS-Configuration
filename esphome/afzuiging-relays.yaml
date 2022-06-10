@@ -1,0 +1,94 @@
+esphome:
+  name: afzuiging-relays
+  comment: Growroom Afzuiging Relays
+
+esp8266:
+  board: nodemcuv2
+  restore_from_flash: true
+
+preferences:
+  flash_write_interval: 1min
+
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Afzuiging Relays"
+    password: !secret pb_std_pass
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+# Timesync with home
+time:
+  - platform: homeassistant
+
+# Variables
+substitutions:
+  name: afzuiging-relays
+  friendly_name: "Afzuiging Relays"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+switch:
+  - platform: gpio
+    name: "Buiten Lucht"
+    pin: 14 #D5
+    inverted: True
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: "Binnen Lucht"
+    pin: 13 #D7
+    inverted: True
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: "Afzuiging Speed 1"
+    pin: 5 #D1
+    inverted: True
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: "Afzuiging Speed 2"
+    pin: 4 #D2
+    inverted: True
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: "Afzuiging Speed 3"
+    pin: 12 #D6
+    inverted: True
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: "Growroom Spare Relay"
+    pin: 0 #D8
+    inverted: True
+    restore_mode: RESTORE_DEFAULT_OFF

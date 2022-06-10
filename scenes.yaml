@@ -1,0 +1,1988 @@
+- id: '1601802386121'
+  name: 00-01 Woonkamer - Overdag
+  entities:
+    light.speelgoedkast_lamp:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgbw
+      friendly_name: Speelgoedkast Lamp
+      supported_features: 44
+      state: unavailable
+    light.surface_led:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgb
+      friendly_name: Surface LED
+      supported_features: 44
+      state: 'off'
+    light.zoutlamp:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoutlamp
+      supported_features: 40
+      state: 'off'
+    light.seleniet:
+      supported_color_modes:
+      - brightness
+      friendly_name: Seleniet
+      supported_features: 40
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    switch.buffetkast:
+      friendly_name: Buffetkast
+      state: 'on'
+    light.kromme_lamp:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Kromme Lamp
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 134
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    light.speelhoek:
+      supported_color_modes:
+      - brightness
+      friendly_name: Speelhoek
+      supported_features: 32
+      state: 'off'
+    light.eettafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Eettafel
+      supported_features: 32
+      color_mode: brightness
+      brightness: 62
+      state: 'on'
+    light.keuken:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keuken
+      supported_features: 32
+      color_mode: brightness
+      brightness: 75
+      state: 'on'
+    light.keukenkastjes:
+      supported_color_modes:
+      - rgbw
+      friendly_name: Keukenkastjes
+      supported_features: 32
+      color_mode: rgbw
+      brightness: 116
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 0
+      xy_color:
+      - 0
+      - 0
+      state: 'on'
+    light.keukenkastjes_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Main
+      supported_features: 32
+      color_mode: brightness
+      brightness: 116
+      state: 'on'
+    light.keukenkastjes_rood:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Rood
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_groen:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Groen
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_blauw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Blauw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_warm_white:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Warm White
+      supported_features: 32
+      color_mode: brightness
+      brightness: 116
+      state: 'on'
+    light.staande_lamp_bank:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Staande Lamp Bank
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 3
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    light.salontafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Salontafel
+      supported_features: 32
+      state: 'off'
+    select.dimmer_2_local_protection_state_4:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Dimmer 2: Local protection state'
+      state: Unprotected
+    select.dimmer_2_rf_protection_state_4:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Dimmer 2: RF protection state'
+      state: Unprotected
+  icon: mdi:white-balance-sunny
+  metadata:
+    light.kromme_lamp:
+      entity_only: false
+    light.staande_lamp_bank:
+      entity_only: false
+    light.eettafel:
+      entity_only: false
+    light.speelhoek:
+      entity_only: false
+    light.keukenkastjes:
+      entity_only: false
+    light.keukenkastjes_main:
+      entity_only: false
+    light.keukenkastjes_rood:
+      entity_only: false
+    light.keukenkastjes_groen:
+      entity_only: false
+    light.keukenkastjes_blauw:
+      entity_only: false
+    light.keukenkastjes_warm_white:
+      entity_only: false
+    light.salontafel:
+      entity_only: false
+    switch.buffetkast:
+      entity_only: false
+    light.keuken:
+      entity_only: false
+    select.dimmer_2_local_protection_state_4:
+      entity_only: false
+    select.dimmer_2_rf_protection_state_4:
+      entity_only: false
+    light.speelgoedkast_lamp:
+      entity_only: false
+    light.seleniet:
+      entity_only: false
+    light.zoutlamp:
+      entity_only: false
+    light.surface_led:
+      entity_only: false
+- id: '1601652039350'
+  name: 00-01 Woonkamer - Licht aan
+  entities:
+    light.speelgoedkast_lamp:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgbw
+      friendly_name: Speelgoedkast Lamp
+      supported_features: 44
+      state: unavailable
+    light.surface_led:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgb
+      friendly_name: Surface LED
+      supported_features: 44
+      state: 'off'
+    light.zoutlamp:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoutlamp
+      supported_features: 40
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.seleniet:
+      supported_color_modes:
+      - brightness
+      friendly_name: Seleniet
+      supported_features: 40
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    switch.buffetkast:
+      friendly_name: Buffetkast
+      state: 'on'
+    light.kromme_lamp:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Kromme Lamp
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    switch.buitenverlichting_voor:
+      friendly_name: Buitenverlichting Voor
+      state: 'on'
+    switch.ganglicht_begane_grond:
+      friendly_name: Ganglicht Begane Grond
+      state: 'on'
+    light.speelhoek:
+      supported_color_modes:
+      - brightness
+      friendly_name: Speelhoek
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.eettafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Eettafel
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.keuken:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keuken
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.uitbouw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Uitbouw
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.keukenkastjes:
+      supported_color_modes:
+      - rgbw
+      friendly_name: Keukenkastjes
+      supported_features: 32
+      color_mode: rgbw
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 0
+      xy_color:
+      - 0
+      - 0
+      state: 'on'
+    light.keukenkastjes_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Main
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.keukenkastjes_rood:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Rood
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_groen:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Groen
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_blauw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Blauw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_warm_white:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Warm White
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.staande_lamp_bank:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Staande Lamp Bank
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    light.tuinverlichting:
+      min_mireds: 153
+      max_mireds: 333
+      effect_list:
+      - Flash
+      - Gradual Change
+      - Meteor Shower
+      - 'Off'
+      supported_color_modes:
+      - color_temp
+      - rgb
+      entity_id:
+      - light.tuinverlichting_1
+      - light.tuinverlichting_2
+      - light.tuinverlichting_3
+      - light.tuinverlichting_4
+      - light.tuinverlichting_5
+      - light.tuinverlichting_6
+      - light.tuinverlichting_7
+      - light.tuinverlichting_schuur
+      icon: mdi:lightbulb-group
+      friendly_name: Tuinverlichting
+      supported_features: 36
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 333
+      hs_color:
+      - 27.82
+      - 56.814
+      rgb_color:
+      - 255
+      - 177
+      - 110
+      xy_color:
+      - 0.496
+      - 0.383
+      effect: 'Off'
+      state: 'on'
+    light.salontafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Salontafel
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    select.dimmer_2_local_protection_state_4:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Dimmer 2: Local protection state'
+      state: Unprotected
+    select.dimmer_2_rf_protection_state_4:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Dimmer 2: RF protection state'
+      state: Unprotected
+  icon: mdi:lightbulb-group
+  metadata:
+    light.kromme_lamp:
+      entity_only: false
+    light.staande_lamp_bank:
+      entity_only: false
+    light.eettafel:
+      entity_only: false
+    light.speelhoek:
+      entity_only: false
+    light.uitbouw:
+      entity_only: false
+    switch.buitenverlichting_voor:
+      entity_only: false
+    switch.ganglicht_begane_grond:
+      entity_only: false
+    light.keukenkastjes:
+      entity_only: false
+    light.keukenkastjes_main:
+      entity_only: false
+    light.keukenkastjes_rood:
+      entity_only: false
+    light.keukenkastjes_groen:
+      entity_only: false
+    light.keukenkastjes_blauw:
+      entity_only: false
+    light.keukenkastjes_warm_white:
+      entity_only: false
+    light.salontafel:
+      entity_only: false
+    switch.buffetkast:
+      entity_only: false
+    light.keuken:
+      entity_only: false
+    select.dimmer_2_local_protection_state_4:
+      entity_only: false
+    select.dimmer_2_rf_protection_state_4:
+      entity_only: false
+    light.speelgoedkast_lamp:
+      entity_only: false
+    light.seleniet:
+      entity_only: false
+    light.zoutlamp:
+      entity_only: false
+    light.surface_led:
+      entity_only: false
+    light.tuinverlichting:
+      entity_only: true
+- id: '1601745321707'
+  name: 00-01 Woonkamer - Eten
+  entities:
+    light.speelgoedkast_lamp:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgbw
+      friendly_name: Speelgoedkast Lamp
+      supported_features: 44
+      state: unavailable
+    light.surface_led:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgb
+      friendly_name: Surface LED
+      supported_features: 44
+      state: 'off'
+    light.zoutlamp:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoutlamp
+      supported_features: 40
+      state: 'off'
+    light.seleniet:
+      supported_color_modes:
+      - brightness
+      friendly_name: Seleniet
+      supported_features: 40
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    switch.buffetkast:
+      friendly_name: Buffetkast
+      state: 'on'
+    light.kromme_lamp:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Kromme Lamp
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 93
+      color_temp: 298
+      hs_color:
+      - 27.329
+      - 48.02
+      rgb_color:
+      - 255
+      - 188
+      - 132
+      xy_color:
+      - 0.466
+      - 0.377
+      state: 'on'
+    light.speelhoek:
+      supported_color_modes:
+      - brightness
+      friendly_name: Speelhoek
+      supported_features: 32
+      color_mode: brightness
+      brightness: 129
+      state: 'on'
+    light.eettafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Eettafel
+      supported_features: 32
+      color_mode: brightness
+      brightness: 126
+      state: 'on'
+    light.keuken:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keuken
+      supported_features: 32
+      color_mode: brightness
+      brightness: 167
+      state: 'on'
+    light.uitbouw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Uitbouw
+      supported_features: 32
+      color_mode: brightness
+      brightness: 175
+      state: 'on'
+    switch.buitenverlichting_voor:
+      friendly_name: Buitenverlichting Voor
+      state: 'on'
+    switch.ganglicht_begane_grond:
+      friendly_name: Ganglicht Begane Grond
+      state: 'off'
+    light.keukenkastjes:
+      supported_color_modes:
+      - rgbw
+      friendly_name: Keukenkastjes
+      supported_features: 32
+      color_mode: rgbw
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 0
+      xy_color:
+      - 0
+      - 0
+      state: 'on'
+    light.keukenkastjes_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Main
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.keukenkastjes_rood:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Rood
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_groen:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Groen
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_blauw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Blauw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_warm_white:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Warm White
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.staande_lamp_bank:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Staande Lamp Bank
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 3
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    light.salontafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Salontafel
+      supported_features: 32
+      state: 'off'
+    select.dimmer_2_local_protection_state_4:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Dimmer 2: Local protection state'
+      state: Unprotected
+    select.dimmer_2_rf_protection_state_4:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Dimmer 2: RF protection state'
+      state: Unprotected
+  icon: mdi:food
+  metadata:
+    light.kromme_lamp:
+      entity_only: false
+    light.staande_lamp_bank:
+      entity_only: false
+    light.eettafel:
+      entity_only: false
+    light.speelhoek:
+      entity_only: false
+    light.uitbouw:
+      entity_only: false
+    switch.buitenverlichting_voor:
+      entity_only: false
+    switch.ganglicht_begane_grond:
+      entity_only: false
+    light.keukenkastjes:
+      entity_only: false
+    light.keukenkastjes_main:
+      entity_only: false
+    light.keukenkastjes_rood:
+      entity_only: false
+    light.keukenkastjes_groen:
+      entity_only: false
+    light.keukenkastjes_blauw:
+      entity_only: false
+    light.keukenkastjes_warm_white:
+      entity_only: false
+    light.salontafel:
+      entity_only: false
+    switch.buffetkast:
+      entity_only: false
+    light.keuken:
+      entity_only: false
+    select.dimmer_2_local_protection_state_4:
+      entity_only: false
+    select.dimmer_2_rf_protection_state_4:
+      entity_only: false
+    light.speelgoedkast_lamp:
+      entity_only: false
+    light.seleniet:
+      entity_only: false
+    light.zoutlamp:
+      entity_only: false
+    light.surface_led:
+      entity_only: false
+- id: '1601714995381'
+  name: 00-01 Woonkamer - Comfort
+  entities:
+    light.speelgoedkast_lamp:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgbw
+      friendly_name: Speelgoedkast Lamp
+      supported_features: 44
+      state: unavailable
+    light.surface_led:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgb
+      friendly_name: Surface LED
+      supported_features: 44
+      state: 'off'
+    light.zoutlamp:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoutlamp
+      supported_features: 40
+      state: 'off'
+    light.seleniet:
+      supported_color_modes:
+      - brightness
+      friendly_name: Seleniet
+      supported_features: 40
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    switch.buffetkast:
+      friendly_name: Buffetkast
+      state: 'on'
+    light.kromme_lamp:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Kromme Lamp
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 3
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 166
+      - 87
+      xy_color:
+      - 0.526
+      - 0.387
+      state: 'on'
+    light.speelhoek:
+      supported_color_modes:
+      - brightness
+      friendly_name: Speelhoek
+      supported_features: 32
+      state: 'off'
+    light.eettafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Eettafel
+      supported_features: 32
+      color_mode: brightness
+      brightness: 62
+      state: 'on'
+    light.keuken:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keuken
+      supported_features: 32
+      color_mode: brightness
+      brightness: 75
+      state: 'on'
+    light.uitbouw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Uitbouw
+      supported_features: 32
+      color_mode: brightness
+      brightness: 3
+      state: 'on'
+    switch.buitenverlichting_voor:
+      friendly_name: Buitenverlichting Voor
+      state: 'on'
+    switch.ganglicht_begane_grond:
+      friendly_name: Ganglicht Begane Grond
+      state: 'on'
+    light.keukenkastjes:
+      supported_color_modes:
+      - rgbw
+      friendly_name: Keukenkastjes
+      supported_features: 32
+      color_mode: rgbw
+      brightness: 46
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 0
+      xy_color:
+      - 0
+      - 0
+      state: 'on'
+    light.keukenkastjes_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Main
+      supported_features: 32
+      color_mode: brightness
+      brightness: 46
+      state: 'on'
+    light.keukenkastjes_rood:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Rood
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_groen:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Groen
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_blauw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Blauw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_warm_white:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Warm White
+      supported_features: 32
+      color_mode: brightness
+      brightness: 46
+      state: 'on'
+    light.salontafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Salontafel
+      supported_features: 32
+      state: 'off'
+    select.dimmer_2_local_protection_state_4:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Dimmer 2: Local protection state'
+      state: Unprotected
+    select.dimmer_2_rf_protection_state_4:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Dimmer 2: RF protection state'
+      state: Unprotected
+  icon: mdi:glass-wine
+  metadata:
+    light.kromme_lamp:
+      entity_only: false
+    light.eettafel:
+      entity_only: false
+    light.speelhoek:
+      entity_only: false
+    light.uitbouw:
+      entity_only: false
+    switch.buitenverlichting_voor:
+      entity_only: false
+    switch.ganglicht_begane_grond:
+      entity_only: false
+    light.keukenkastjes:
+      entity_only: false
+    light.keukenkastjes_main:
+      entity_only: false
+    light.keukenkastjes_rood:
+      entity_only: false
+    light.keukenkastjes_groen:
+      entity_only: false
+    light.keukenkastjes_blauw:
+      entity_only: false
+    light.keukenkastjes_warm_white:
+      entity_only: false
+    light.salontafel:
+      entity_only: false
+    switch.buffetkast:
+      entity_only: false
+    light.keuken:
+      entity_only: false
+    select.dimmer_2_local_protection_state_4:
+      entity_only: false
+    select.dimmer_2_rf_protection_state_4:
+      entity_only: false
+    light.speelgoedkast_lamp:
+      entity_only: false
+    light.seleniet:
+      entity_only: false
+    light.zoutlamp:
+      entity_only: false
+    light.surface_led:
+      entity_only: false
+- id: '1601652080647'
+  name: 00-01 Woonkamer - Licht uit
+  entities:
+    light.speelgoedkast_lamp:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgbw
+      friendly_name: Speelgoedkast Lamp
+      supported_features: 44
+      state: unavailable
+    light.surface_led:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgb
+      friendly_name: Surface LED
+      supported_features: 44
+      state: 'off'
+    light.zoutlamp:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoutlamp
+      supported_features: 40
+      state: 'off'
+    light.seleniet:
+      supported_color_modes:
+      - brightness
+      friendly_name: Seleniet
+      supported_features: 40
+      state: 'off'
+    switch.buffetkast:
+      friendly_name: Buffetkast
+      state: 'off'
+    light.kromme_lamp:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Kromme Lamp
+      supported_features: 32
+      state: 'off'
+    switch.buitenverlichting_voor:
+      friendly_name: Buitenverlichting Voor
+      state: 'off'
+    switch.ganglicht_begane_grond:
+      friendly_name: Ganglicht Begane Grond
+      state: 'on'
+    light.speelhoek:
+      supported_color_modes:
+      - brightness
+      friendly_name: Speelhoek
+      supported_features: 32
+      state: 'off'
+    light.eettafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Eettafel
+      supported_features: 32
+      state: 'off'
+    light.keuken:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keuken
+      supported_features: 32
+      state: 'off'
+    light.uitbouw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Uitbouw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes:
+      supported_color_modes:
+      - rgbw
+      friendly_name: Keukenkastjes
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Main
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_rood:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Rood
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_groen:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Groen
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_blauw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Blauw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_warm_white:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Warm White
+      supported_features: 32
+      state: 'off'
+    light.staande_lamp_bank:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Staande Lamp Bank
+      supported_features: 32
+      state: 'off'
+    light.tuinverlichting:
+      min_mireds: 153
+      max_mireds: 333
+      effect_list:
+      - Flash
+      - Gradual Change
+      - Meteor Shower
+      - 'Off'
+      supported_color_modes:
+      - color_temp
+      - rgb
+      entity_id:
+      - light.tuinverlichting_1
+      - light.tuinverlichting_2
+      - light.tuinverlichting_3
+      - light.tuinverlichting_4
+      - light.tuinverlichting_5
+      - light.tuinverlichting_6
+      - light.tuinverlichting_7
+      - light.tuinverlichting_schuur
+      icon: mdi:lightbulb-group
+      friendly_name: Tuinverlichting
+      supported_features: 36
+      state: 'off'
+    light.salontafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Salontafel
+      supported_features: 32
+      state: 'off'
+    select.dimmer_2_local_protection_state_4:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Dimmer 2: Local protection state'
+      state: Unprotected
+    select.dimmer_2_rf_protection_state_4:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Dimmer 2: RF protection state'
+      state: Unprotected
+  icon: mdi:power
+  metadata:
+    light.kromme_lamp:
+      entity_only: false
+    light.staande_lamp_bank:
+      entity_only: false
+    light.eettafel:
+      entity_only: false
+    light.speelhoek:
+      entity_only: false
+    light.uitbouw:
+      entity_only: false
+    switch.buitenverlichting_voor:
+      entity_only: false
+    switch.ganglicht_begane_grond:
+      entity_only: false
+    light.keukenkastjes:
+      entity_only: false
+    light.keukenkastjes_main:
+      entity_only: false
+    light.keukenkastjes_rood:
+      entity_only: false
+    light.keukenkastjes_groen:
+      entity_only: false
+    light.keukenkastjes_blauw:
+      entity_only: false
+    light.keukenkastjes_warm_white:
+      entity_only: false
+    light.salontafel:
+      entity_only: false
+    switch.buffetkast:
+      entity_only: false
+    light.keuken:
+      entity_only: false
+    select.dimmer_2_local_protection_state_4:
+      entity_only: false
+    select.dimmer_2_rf_protection_state_4:
+      entity_only: false
+    light.speelgoedkast_lamp:
+      entity_only: false
+    light.seleniet:
+      entity_only: false
+    light.zoutlamp:
+      entity_only: false
+    light.surface_led:
+      entity_only: false
+    light.tuinverlichting:
+      entity_only: true
+- id: '1633200472734'
+  name: 00-01 Woonkamer - Fijne Thuiskomst
+  entities:
+    light.speelgoedkast_lamp:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgbw
+      friendly_name: Speelgoedkast Lamp
+      supported_features: 44
+      color_mode: rgbw
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      rgbw_color:
+      - 255
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: Rainbow
+      state: 'on'
+    light.surface_led:
+      effect_list:
+      - None
+      - Random
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      - Addressable Flicker
+      supported_color_modes:
+      - rgb
+      friendly_name: Surface LED
+      supported_features: 44
+      color_mode: rgb
+      brightness: 76
+      hs_color:
+      - 240
+      - 100
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      xy_color:
+      - 0.136
+      - 0.04
+      effect: None
+      state: 'on'
+    light.zoutlamp:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoutlamp
+      supported_features: 40
+      state: 'off'
+    light.seleniet:
+      supported_color_modes:
+      - brightness
+      friendly_name: Seleniet
+      supported_features: 40
+      state: 'off'
+    switch.buffetkast:
+      friendly_name: Buffetkast
+      state: 'off'
+    light.kromme_lamp:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Kromme Lamp
+      supported_features: 32
+      state: 'off'
+    switch.buitenverlichting_voor:
+      friendly_name: Buitenverlichting Voor
+      state: 'off'
+    switch.ganglicht_begane_grond:
+      friendly_name: Ganglicht Begane Grond
+      state: 'off'
+    light.speelhoek:
+      supported_color_modes:
+      - brightness
+      friendly_name: Speelhoek
+      supported_features: 32
+      state: 'off'
+    light.eettafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Eettafel
+      supported_features: 32
+      color_mode: brightness
+      brightness: 3
+      state: 'on'
+    light.keuken:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keuken
+      supported_features: 32
+      color_mode: brightness
+      brightness: 3
+      state: 'on'
+    light.uitbouw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Uitbouw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes:
+      supported_color_modes:
+      - rgbw
+      friendly_name: Keukenkastjes
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_main:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Main
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_rood:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Rood
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_groen:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Groen
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_blauw:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Blauw
+      supported_features: 32
+      state: 'off'
+    light.keukenkastjes_warm_white:
+      supported_color_modes:
+      - brightness
+      friendly_name: Keukenkastjes Warm White
+      supported_features: 32
+      state: 'off'
+    light.staande_lamp_bank:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      friendly_name: Staande Lamp Bank
+      supported_features: 32
+      state: 'off'
+    light.tuinverlichting:
+      min_mireds: 153
+      max_mireds: 333
+      effect_list:
+      - Flash
+      - Gradual Change
+      - Meteor Shower
+      - 'Off'
+      supported_color_modes:
+      - color_temp
+      - rgb
+      entity_id:
+      - light.tuinverlichting_1
+      - light.tuinverlichting_2
+      - light.tuinverlichting_3
+      - light.tuinverlichting_4
+      - light.tuinverlichting_5
+      - light.tuinverlichting_6
+      - light.tuinverlichting_7
+      - light.tuinverlichting_schuur
+      icon: mdi:lightbulb-group
+      friendly_name: Tuinverlichting
+      supported_features: 36
+      color_mode: color_temp
+      brightness: 64
+      hs_color:
+      - 27.82
+      - 56.814
+      rgb_color:
+      - 255
+      - 177
+      - 110
+      xy_color:
+      - 0.496
+      - 0.383
+      effect: 'Off'
+      color_temp: 333
+      state: 'on'
+    light.salontafel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Salontafel
+      supported_features: 32
+      state: 'off'
+    select.dimmer_2_local_protection_state_4:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Dimmer 2: Local protection state'
+      state: Unprotected
+    select.dimmer_2_rf_protection_state_4:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Dimmer 2: RF protection state'
+      state: Unprotected
+  icon: mdi:home-map-marker
+  metadata:
+    light.kromme_lamp:
+      entity_only: false
+    light.staande_lamp_bank:
+      entity_only: false
+    light.eettafel:
+      entity_only: false
+    light.speelhoek:
+      entity_only: false
+    light.uitbouw:
+      entity_only: false
+    switch.buitenverlichting_voor:
+      entity_only: false
+    switch.ganglicht_begane_grond:
+      entity_only: false
+    light.keukenkastjes:
+      entity_only: false
+    light.keukenkastjes_main:
+      entity_only: false
+    light.keukenkastjes_rood:
+      entity_only: false
+    light.keukenkastjes_groen:
+      entity_only: false
+    light.keukenkastjes_blauw:
+      entity_only: false
+    light.keukenkastjes_warm_white:
+      entity_only: false
+    light.salontafel:
+      entity_only: false
+    switch.buffetkast:
+      entity_only: false
+    light.keuken:
+      entity_only: false
+    select.dimmer_2_local_protection_state_4:
+      entity_only: false
+    select.dimmer_2_rf_protection_state_4:
+      entity_only: false
+    light.seleniet:
+      entity_only: false
+    light.zoutlamp:
+      entity_only: false
+    light.surface_led:
+      entity_only: false
+    light.tuinverlichting:
+      entity_only: true
+    light.speelgoedkast_lamp:
+      entity_only: false
+- id: '1638722168053'
+  name: 00-01 Woonkamer - Disco
+  entities: {}
+  icon: mdi:party-popper
+  metadata: {}
+- id: '1647960696732'
+  name: 01-00 1e Etage - Aan
+  entities:
+    switch.computerkamer_licht:
+      friendly_name: Computerkamer Licht
+      state: 'on'
+    switch.ganglicht_1e_etage:
+      friendly_name: Ganglicht 1e Etage
+      state: 'on'
+    select.single_switch_2_local_protection_state:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Single Switch 2: Local protection state'
+      state: Unprotected
+    select.single_switch_2_rf_protection_state:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Single Switch 2: RF protection state'
+      state: Unprotected
+    light.slaapkamer_jongens_hoofdlicht:
+      effect_list:
+      - None
+      - Addressable Flicker
+      - Addressable Flicker Effect With Custom Values
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Fast Pulse
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values
+      - Lightning
+      - Pulse
+      - Rain
+      - Rainbow
+      - Rainbow Effect With Custom Values
+      - Random
+      - Random Effect With Custom Values
+      - Random Twinkle
+      - Random Twinkle Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Slow Pulse
+      - Snow
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      supported_color_modes:
+      - rgbw
+      entity_id:
+      - light.slaapkamer_jongens_hoofdlicht_1
+      - light.slaapkamer_jongens_hoofdlicht_2
+      icon: mdi:lightbulb-group
+      friendly_name: Slaapkamer Jongens Hoofdlicht
+      supported_features: 44
+      color_mode: rgbw
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: None
+      state: 'on'
+    switch.slaapkamer_jongens_licht:
+      friendly_name: Slaapkamer Jongens Licht
+      state: 'on'
+    light.badkamer_licht:
+      supported_color_modes:
+      - brightness
+      friendly_name: Badkamer Licht
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    select.badkamer_licht_local_protection_state:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Badkamer Licht: Local protection state'
+      state: Unprotected
+    select.badkamer_licht_rf_protection_state:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Badkamer Licht: RF protection state'
+      state: Unprotected
+    light.nachtlampje_jongens:
+      effect_list:
+      - None
+      - Flicker
+      - Rainbow
+      supported_color_modes:
+      - rgbw
+      icon: mdi:cube
+      friendly_name: Nachtlampje Jongens
+      supported_features: 44
+      color_mode: rgbw
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: None
+      state: 'on'
+    light.minecraft_torches:
+      effect_list:
+      - None
+      - Fire
+      - Rainbow
+      supported_color_modes:
+      - rgbw
+      entity_id:
+      - light.minecraft_torch_1
+      - light.minecraft_torch_2
+      - light.minecraft_torch_3
+      - light.minecraft_torch_4
+      icon: mdi:lightbulb-group
+      friendly_name: Minecraft Torches
+      supported_features: 44
+      color_mode: rgbw
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: None
+      state: 'on'
+    switch.badkamer_kastjes:
+      friendly_name: Badkamer Kastjes
+      state: 'on'
+  metadata:
+    switch.ganglicht_1e_etage:
+      entity_only: false
+    select.single_switch_2_local_protection_state:
+      entity_only: false
+    select.single_switch_2_rf_protection_state:
+      entity_only: false
+    switch.slaapkamer_jongens_licht:
+      entity_only: false
+    light.slaapkamer_jongens_hoofdlicht:
+      entity_only: true
+    light.minecraft_torches:
+      entity_only: true
+    light.nachtlampje_jongens:
+      entity_only: true
+    switch.computerkamer_licht:
+      entity_only: false
+    switch.badkamer_kastjes:
+      entity_only: false
+    light.badkamer_licht:
+      entity_only: false
+    select.badkamer_licht_local_protection_state:
+      entity_only: false
+    select.badkamer_licht_rf_protection_state:
+      entity_only: false
+- id: '1654420520036'
+  name: 02-01 Zolder - Aan
+  entities:
+    switch.overloop_zolder_licht:
+      icon: mdi:stairs
+      friendly_name: Overloop Zolder Licht
+      state: 'on'
+    select.overloop_zolder_licht_local_protection_state_2:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Overloop Zolder Licht: Local protection state'
+      state: Unprotected
+    select.overloop_zolder_licht_rf_protection_state_2:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Overloop Zolder Licht: RF protection state'
+      state: Unprotected
+    light.slaapkamer_dimmer:
+      supported_color_modes:
+      - brightness
+      friendly_name: Slaapkamer Dimmer
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    select.slaapkamer_dimmer_local_protection_state_6:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Slaapkamer Dimmer: Local protection state'
+      state: Unprotected
+    select.slaapkamer_dimmer_rf_protection_state_6:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Slaapkamer Dimmer: RF protection state'
+      state: Unprotected
+    switch.washok:
+      restored: true
+      icon: mdi:washing-machine
+      friendly_name: Washok
+      supported_features: 0
+      state: unavailable
+    switch.vliering_licht:
+      friendly_name: Vliering Licht
+      state: 'on'
+  metadata:
+    switch.vliering_licht:
+      entity_only: false
+    switch.washok:
+      entity_only: false
+    switch.overloop_zolder_licht:
+      entity_only: false
+    select.overloop_zolder_licht_local_protection_state_2:
+      entity_only: false
+    select.overloop_zolder_licht_rf_protection_state_2:
+      entity_only: false
+    light.slaapkamer_dimmer:
+      entity_only: false
+    select.slaapkamer_dimmer_local_protection_state_6:
+      entity_only: false
+    select.slaapkamer_dimmer_rf_protection_state_6:
+      entity_only: false
+- id: '1654532854315'
+  name: 01-00 1e Etage - Uit
+  entities:
+    switch.computerkamer_licht:
+      friendly_name: Computerkamer Licht
+      state: 'off'
+    switch.ganglicht_1e_etage:
+      friendly_name: Ganglicht 1e Etage
+      state: 'off'
+    select.single_switch_2_local_protection_state:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Single Switch 2: Local protection state'
+      state: Unprotected
+    select.single_switch_2_rf_protection_state:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Single Switch 2: RF protection state'
+      state: Unprotected
+    light.slaapkamer_jongens_hoofdlicht:
+      effect_list:
+      - None
+      - Addressable Flicker
+      - Addressable Flicker Effect With Custom Values
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Fast Pulse
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values
+      - Lightning
+      - Pulse
+      - Rain
+      - Rainbow
+      - Rainbow Effect With Custom Values
+      - Random
+      - Random Effect With Custom Values
+      - Random Twinkle
+      - Random Twinkle Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Slow Pulse
+      - Snow
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      supported_color_modes:
+      - rgbw
+      entity_id:
+      - light.slaapkamer_jongens_hoofdlicht_1
+      - light.slaapkamer_jongens_hoofdlicht_2
+      icon: mdi:lightbulb-group
+      friendly_name: Slaapkamer Jongens Hoofdlicht
+      supported_features: 44
+      state: 'off'
+    switch.slaapkamer_jongens_licht:
+      friendly_name: Slaapkamer Jongens Licht
+      state: 'off'
+    light.badkamer_licht:
+      supported_color_modes:
+      - brightness
+      friendly_name: Badkamer Licht
+      supported_features: 32
+      state: 'off'
+    select.badkamer_licht_local_protection_state:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Badkamer Licht: Local protection state'
+      state: Unprotected
+    select.badkamer_licht_rf_protection_state:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Badkamer Licht: RF protection state'
+      state: Unprotected
+    light.nachtlampje_jongens:
+      effect_list:
+      - None
+      - Flicker
+      - Rainbow
+      supported_color_modes:
+      - rgbw
+      icon: mdi:cube
+      friendly_name: Nachtlampje Jongens
+      supported_features: 44
+      state: 'off'
+    light.minecraft_torches:
+      effect_list:
+      - None
+      - Fire
+      - Rainbow
+      supported_color_modes:
+      - rgbw
+      entity_id:
+      - light.minecraft_torch_1
+      - light.minecraft_torch_2
+      - light.minecraft_torch_3
+      - light.minecraft_torch_4
+      icon: mdi:lightbulb-group
+      friendly_name: Minecraft Torches
+      supported_features: 44
+      state: 'off'
+  metadata:
+    switch.ganglicht_1e_etage:
+      entity_only: false
+    select.single_switch_2_local_protection_state:
+      entity_only: false
+    select.single_switch_2_rf_protection_state:
+      entity_only: false
+    switch.slaapkamer_jongens_licht:
+      entity_only: false
+    light.slaapkamer_jongens_hoofdlicht:
+      entity_only: true
+    light.minecraft_torches:
+      entity_only: true
+    light.nachtlampje_jongens:
+      entity_only: true
+    switch.computerkamer_licht:
+      entity_only: false
+    light.badkamer_licht:
+      entity_only: false
+    select.badkamer_licht_local_protection_state:
+      entity_only: false
+    select.badkamer_licht_rf_protection_state:
+      entity_only: false
+- id: '1654533081379'
+  name: 02-01 Zolder - Uit
+  entities:
+    switch.overloop_zolder_licht:
+      icon: mdi:stairs
+      friendly_name: Overloop Zolder Licht
+      state: 'off'
+    select.overloop_zolder_licht_local_protection_state_2:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Overloop Zolder Licht: Local protection state'
+      state: Unprotected
+    select.overloop_zolder_licht_rf_protection_state_2:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Overloop Zolder Licht: RF protection state'
+      state: Unprotected
+    light.slaapkamer_dimmer:
+      supported_color_modes:
+      - brightness
+      friendly_name: Slaapkamer Dimmer
+      supported_features: 32
+      state: 'off'
+    select.slaapkamer_dimmer_local_protection_state_6:
+      options:
+      - Unprotected
+      - NoOperationPossible
+      friendly_name: 'Slaapkamer Dimmer: Local protection state'
+      state: Unprotected
+    select.slaapkamer_dimmer_rf_protection_state_6:
+      options:
+      - Unprotected
+      - NoControl
+      friendly_name: 'Slaapkamer Dimmer: RF protection state'
+      state: Unprotected
+    switch.washok:
+      restored: true
+      icon: mdi:washing-machine
+      friendly_name: Washok
+      supported_features: 0
+      state: unavailable
+    switch.vliering_licht:
+      friendly_name: Vliering Licht
+      state: 'off'
+  metadata:
+    switch.vliering_licht:
+      entity_only: false
+    switch.washok:
+      entity_only: false
+    switch.overloop_zolder_licht:
+      entity_only: false
+    select.overloop_zolder_licht_local_protection_state_2:
+      entity_only: false
+    select.overloop_zolder_licht_rf_protection_state_2:
+      entity_only: false
+    light.slaapkamer_dimmer:
+      entity_only: false
+    select.slaapkamer_dimmer_local_protection_state_6:
+      entity_only: false
+    select.slaapkamer_dimmer_rf_protection_state_6:
+      entity_only: false
+- id: '1654533137603'
+  name: 00-00 Hele Huis Uit
+  entities: {}
+  metadata: {}
+- id: '1654533164413'
+  name: 00-00 Hele Huis Aan
+  entities: {}
+  metadata: {}

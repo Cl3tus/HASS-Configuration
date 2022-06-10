@@ -1,0 +1,174 @@
+esphome:
+  name: slaapkamer-jongens-hoofdlicht-1
+  comment: Slaapkamer Jongens Hoofdlicht 1
+
+esp8266:
+  board: nodemcuv2
+  restore_from_flash: true
+
+preferences:
+  flash_write_interval: 1min
+  
+# Enable logging
+logger:
+#    level: VERY_VERBOSE
+    
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Slaapkamer Jongens Hoofdlicht 1"
+    password: !secret pb_std_pass
+    
+captive_portal:
+
+# Timesync with home
+time:
+  - platform: homeassistant
+
+# Variables
+substitutions:
+  name: slaapkamer-jongens-hoofdlicht-1
+  friendly_name: "Slaapkamer Jongens Hoofdlicht 1"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+# Light
+light:
+  - platform: neopixelbus
+    method: ESP8266_DMA
+    #method: bit_bang
+    #method: esp32_i2s
+    type: GRBW
+    variant: SK6812
+    color_correct: [95%, 95%, 95%, 95%]
+    #pin: GPIO13
+    pin: GPIO3
+    num_leds: 300
+    name: "Slaapkamer Jongens Hoofdlicht 1"
+    effects:
+      - pulse:
+      - pulse:
+          name: "Fast Pulse"
+          transition_length: 0.5s
+          update_interval: 0.5s
+      - pulse:
+          name: "Slow Pulse"
+          # transition_length: 1s      # defaults to 1s
+          update_interval: 2s
+      - random:
+      - random:
+          name: Random Effect With Custom Values
+          transition_length: 5s
+          update_interval: 7s      
+      - strobe:
+      - strobe:
+          name: Strobe Effect With Custom Values
+          colors:
+            - state: true
+              brightness: 100%
+              red: 100%
+              green: 90%
+              blue: 0%
+              duration: 500ms
+            - state: false
+              duration: 250ms
+            - state: true
+              brightness: 100%
+              red: 0%
+              green: 100%
+              blue: 0%
+              duration: 500ms      
+      - flicker:
+      - flicker:
+          name: Flicker Effect With Custom Values
+          alpha: 95%
+          intensity: 1.5%      
+      - addressable_rainbow:
+      - addressable_rainbow:
+          name: Rainbow Effect With Custom Values
+          speed: 30
+          width: 100      
+      - addressable_color_wipe:
+      - addressable_color_wipe:
+          name: Color Wipe Effect With Custom Values
+          colors:
+            - red: 100%
+              green: 100%
+              blue: 100%
+              num_leds: 1
+            - red: 0%
+              green: 0%
+              blue: 0%
+              num_leds: 1
+          add_led_interval: 100ms
+          reverse: false      
+      - addressable_scan:
+      - addressable_scan:
+          name: Scan Effect With Custom Values
+          move_interval: 100ms
+          scan_width: 300     
+      - addressable_twinkle:
+      - addressable_twinkle:
+          name: Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 4ms      
+      - addressable_random_twinkle:
+      - addressable_random_twinkle:
+          name: Random Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 32ms      
+      - addressable_fireworks:
+      - addressable_fireworks:
+          name: Fireworks Effect With Custom Values
+          update_interval: 32ms
+          spark_probability: 10%
+          use_random_color: false
+          fade_out_rate: 120      
+      - addressable_flicker:
+      - addressable_flicker:
+          name: Addressable Flicker Effect With Custom Values
+          update_interval: 16ms
+          intensity: 5%      
+      - addressable_fireworks:
+          name: Lightning
+          update_interval: 32ms
+          spark_probability: 7%
+          fade_out_rate: 120      
+      - addressable_flicker:
+          name: Rain
+          update_interval: 30ms
+          intensity: 20%
+      - addressable_flicker:
+          name: Snow
+          update_interval: 350ms
+          intensity: 50%
+    restore_mode: RESTORE_DEFAULT_OFF

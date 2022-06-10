@@ -1,0 +1,7 @@
+# RFLink 433MHz Switches
+- platform: rflink
+  automatic_add: false
+  devices:
+    newkaku_01e7e82e_c:
+      name: 'Deurbel'
+      fire_event: True

@@ -1,0 +1,14 @@
+# Spotcast LoveLace card integration
+sp_dc: !secret spotcast_cl3tus_sp_dc
+sp_key: !secret spotcast_cl3tus_sp_key
+country: NL
+accounts:
+  cl3tus:
+    sp_dc: !secret spotcast_cl3tus_sp_dc
+    sp_key: !secret spotcast_cl3tus_sp_key
+  cl3tus_thuis:
+    sp_dc: !secret spotcast_thuis_sp_dc
+    sp_key: !secret spotcast_thuis_sp_key
+  ibonnemaijers:
+    sp_dc: !secret spotcast_ibonnemaijers_sp_dc
+    sp_key: !secret spotcast_ibonnemaijers_sp_key

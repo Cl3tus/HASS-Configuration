@@ -1,0 +1,92 @@
+- platform: template
+  sensors:
+    badkamerdeur:
+      friendly_name: Badkamerdeur
+      value_template: >-
+        {% if states.binary_sensor.badkamerdeur_sensor.state == 'on' %}
+          Open
+        {% elif states.binary_sensor.badkamerdeur_sensor.state == 'off' %}
+          Dicht
+        {% else %}
+          n/a
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.badkamerdeur_sensor.state == 'on' %}
+          mdi:door-open
+        {% elif states.binary_sensor.badkamerdeur_sensor.state == 'off' %}
+          mdi:door-closed
+        {% else %}
+          mdi:help
+        {% endif %} 
+    trapkast_deur:
+      friendly_name: Trapkastdeur
+      value_template: >-
+        {% if states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'on' %}
+          Open
+        {% elif states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'off' %}
+          Dicht
+        {% else %}
+          n/a
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'on' %}
+          mdi:door-open
+        {% elif states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'off' %}
+          mdi:door-closed
+        {% else %}
+          mdi:help
+        {% endif %}
+    binnen_afzuiging:
+      friendly_name: Afzuiging Binnen
+      value_template: >-
+        {% if states.switch.binnen_lucht.state == 'on' %}
+          Open
+        {% elif states.switch.binnen_lucht.state == 'off' %}
+          Dicht
+        {% else %}
+          n/a
+        {% endif %}
+      icon_template: >-
+        {% if states.switch.binnen_lucht.state == 'on' %}
+          mdi:valve-open
+        {% elif states.switch.binnen_lucht.state == 'off' %}
+          mdi:valve-closed
+        {% else %}
+          mdi:help
+        {% endif %}
+    buiten_afzuiging:
+      friendly_name: Afzuiging Buiten
+      value_template: >-
+        {% if states.switch.buiten_lucht.state == 'on' %}
+          Open
+        {% elif states.switch.buiten_lucht.state == 'off' %}
+          Dicht
+        {% else %}
+          n/a
+        {% endif %}
+      icon_template: >-
+        {% if states.switch.buiten_lucht.state == 'on' %}
+          mdi:valve-open
+        {% elif states.switch.buiten_lucht.state == 'off' %}
+          mdi:valve-closed
+        {% else %}
+          mdi:help
+        {% endif %}
+    vliering_luik:
+      friendly_name: Vliering Luik
+      value_template: >-
+        {% if states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'on' %}
+          Open
+        {% elif states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'off' %}
+          Dicht
+        {% else %}
+          n/a
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'on' %}
+          mdi:door-open
+        {% elif states.binary_sensor.trapkast_deur_access_control_window_door_is_open == 'off' %}
+          mdi:door-closed
+        {% else %}
+          mdi:help
+        {% endif %}

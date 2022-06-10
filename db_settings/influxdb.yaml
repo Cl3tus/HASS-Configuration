@@ -1,0 +1,38 @@
+host: !secret influx_host
+port: !secret influx_port
+database: !secret influx_database
+username: !secret influx_username
+password: !secret influx_password
+ssl: false
+verify_ssl: false
+max_retries: 3
+default_measurement: state
+include:
+  entities:
+     - sensor.growroom_1_temperatuur_atc
+     - sensor.growroom_1_vochtigheid_atc
+     - sensor.growroom_2_temperatuur_atc
+     - sensor.growroom_2_vochtigheid_atc
+     - sensor.growtent_humidity_atc
+     - sensor.growtent_temperature_atc
+     - sensor.sproutbox_temperature
+     - sensor.sproutbox_humidity
+     - sensor.weckpot_1_temperature
+     - sensor.weckpot_1_humidity
+     - sensor.weckpot_2_temperatuur_atc
+     - sensor.weckpot_2_vochtigheid_atc
+     - sensor.weckpot_3_temperatuur_atc
+     - sensor.weckpot_3_vochtigheid_atc
+     - sensor.weckpot_4_temperatuur_atc
+     - sensor.weckpot_4_vochtigheid_atc
+     - sensor.sproutbox_vapor_deficit
+     - sensor.growtent_vapor_deficit
+     - sensor.afzuiging_binnen_intake_temperatuur_atc
+     - sensor.afzuiging_binnen_intake_vochtigheid_atc
+     - sensor.afzuiging_buiten_intake_temperatuur_atc
+     - sensor.afzuiging_buiten_intake_vochtigheid_atc
+     - sensor.tent_intake_temperatuur_atc
+     - sensor.tent_intake_vochtigheid_atc
+tags:
+  instance: prod
+  source: hass

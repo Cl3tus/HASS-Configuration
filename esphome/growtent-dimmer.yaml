@@ -1,0 +1,79 @@
+esphome:
+  name: growtent-dimmer
+  comment: Growtent Dimmer
+
+esp8266:
+  board: nodemcuv2
+  restore_from_flash: true
+
+preferences:
+  flash_write_interval: 1min
+
+# Enable logging
+logger:
+#    level: VERY_VERBOSE
+    
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Growtent Dimmer Sensor"
+    password: !secret pb_std_pass
+
+captive_portal:
+
+# Timesync with home
+time:
+  - platform: homeassistant
+
+# Variables
+substitutions:
+  name: growtent-dimmer
+  friendly_name: "Growtent Dimmer"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+      
+# Example configuration entry
+output:
+  - platform: esp8266_pwm
+    pin: D1
+    frequency: 1000 Hz
+    id: pwm_output
+    inverted: true
+
+# Example usage in a light
+light:
+  - platform: monochromatic
+    output: pwm_output
+    name: "Growtent Dimmer Light"
+    gamma_correct: 0
+    restore_mode: RESTORE_DEFAULT_OFF

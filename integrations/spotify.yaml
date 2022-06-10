@@ -1,0 +1,2 @@
+client_id: !secret spotify_cl3tus_client_id
+client_secret: !secret spotify_cl3tus_client_secret

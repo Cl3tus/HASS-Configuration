@@ -1,0 +1,27 @@
+- platform: qnap
+  host: !secret nas_ip
+  port: !secret nas_port
+  ssl: true
+  verify_ssl: false # (due to self signed cert)
+  username: !secret nas_username
+  password: !secret nas_password
+  # timeout: 10 # (default = 10)
+  # drivers: # (drivers list (optional, default: all drivers) Array of drives to monitor (ex: 0:1).)
+  # volumes: # (volumes list (optional, default: all volumes) Array of volumes to monitor (ex: DataVol1).)
+  # nics: # ( nics list (optional, default: all NICs)Array of network interfaces to monitor (ex: eth0). )
+  monitored_conditions:
+    - status
+    - system_temp
+    - cpu_temp
+    - cpu_usage
+    - memory_free
+    - memory_used
+    - memory_percent_used
+    - network_link_status
+    - network_tx
+    - network_rx
+    - drive_smart_status
+    - drive_temp
+    - volume_size_free
+    - volume_size_used
+    - volume_percentage_used

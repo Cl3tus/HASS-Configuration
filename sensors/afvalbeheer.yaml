@@ -1,0 +1,15 @@
+- platform: afvalbeheer
+  wastecollector: Purmerend
+  resources:
+    - restafval
+    - bio-afval
+    - papier
+  postcode: !secret afvalbeheer_postcode
+  streetnumber: !secret afvalbeheer_streetnumber
+  upcomingsensor: 1
+  dateformat: "%d-%m-%Y"
+  dateonly: 0
+  name: "Afval"
+  builtinicons: 0
+  dutch: 1
+  #printwastetypes: 1

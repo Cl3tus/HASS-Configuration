@@ -1,0 +1,2 @@
+client_id: !secret google_paul_client_id
+client_secret: !secret google_paul_client_secret

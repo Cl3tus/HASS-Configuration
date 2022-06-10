@@ -1,0 +1,5 @@
+#default: debug
+#logs:
+  #homeassistant.components.websocket_api: debug
+  #  rflink: debug
+#  homeassistant.components.rflink: debug

@@ -1,0 +1,3 @@
+#db_url: !secret SQL_DB_URL
+purge_keep_days: 120
+auto_purge: true

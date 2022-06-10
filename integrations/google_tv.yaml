@@ -1,0 +1,29 @@
+#- platform: androidtv 
+#  host: 192.168.2.223
+#  port: 5555
+#  name: "Woonkamer"
+#  turn_on_command: "input keyevent 26"
+#  turn_off_command: "input keyevent 26"
+  #adb_server_ip: 127.0.0.1 # IP for the HA add on 
+  #adb_server_port: 5037 # port on the ADB server add on`
+#- platform: androidtv 
+#  host: 192.168.2.216
+#  port: 5555
+#  name: "Slaapkamer"
+#  turn_on_command: "input keyevent 26"
+#  turn_off_command: "input keyevent 26"
+  #adb_server_ip: 127.0.0.1 # IP for the HA add on 
+  #adb_server_port: 5037 # port on the ADB server add on`
+
+
+
+#input keyevent 22 KEYCODE_DPAD_right
+#input keyevent 19 KEYCODE_DPAD_UP
+#input keyevent 20 KEYCODE_DPAD_DOWN
+#input keyevent 21 KEYCODE_DPAD_LEFT
+#input keyevent 23 KEYCODE_DPAD_CENTER
+#input keyevent 4 KEYCODE_BACK
+#input keyevent 26 KEYCODE_POWER toggles tv power
+#input keyevent 177 KEYCODE_TV_POWER toggles tv power
+#input keyevent 224 KEYCODE_WAKEUP turns on tv
+#input keyevent 223 KEYCODE_SLEEP turns off tva

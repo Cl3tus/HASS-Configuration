@@ -1,0 +1,85 @@
+esphome:
+  name: speelgoedkast-lamp
+  comment: Speelgoedkast Lamp
+
+esp8266:
+  board: nodemcuv2
+  restore_from_flash: true
+
+preferences:
+  flash_write_interval: 1min
+  
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Speelgoedkast Lamp Fallback"
+    password: !secret pb_std_pass
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+# Timesync with home
+time:
+  - platform: homeassistant
+  
+# Variables
+substitutions:
+  name: speelgoedkast-lamp
+  friendly_name: "Speelgoedkast Lamp"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+# Addressable Lightstrip
+light:
+  - platform: neopixelbus
+    method: bit_bang
+    type: GRBW
+    variant: 800KBPS
+    color_correct: [95%, 95%, 95%, 95%]
+    pin: GPIO3
+    num_leds: 56
+    name: "Speelgoedkast Lamp"
+    effects:
+      - random:
+      - strobe:
+      - flicker:
+      - addressable_rainbow:
+      - addressable_color_wipe:
+      - addressable_scan:
+      - addressable_twinkle:
+      - addressable_random_twinkle:
+      - addressable_fireworks:
+      - addressable_flicker:
+    restore_mode: RESTORE_DEFAULT_OFF

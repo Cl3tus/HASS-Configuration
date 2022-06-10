@@ -1,0 +1,24 @@
+growroom_main_energy:
+  source: sensor.growroom_main_energy
+  cycle: yearly
+sproutbox_main_energy:
+  source: sensor.sproutbox_main_energy
+  cycle: yearly
+growtent_growlight_energy:
+  source: sensor.growtent_growlight_energy
+  cycle: yearly
+growtent_afzuiging_energy:
+  source: sensor.growtent_afzuiging_energy
+  cycle: yearly
+growtent_fan_1_energy:
+  source: sensor.growtent_fan_1_energy
+  cycle: yearly
+growtent_fan_2_energy:
+  source: sensor.growtent_fan_2_energy
+  cycle: yearly
+watermeter_usage_in_m3_yearly:
+  source: sensor.watermeter_total_consumption
+  cycle: yearly
+watermeter_usage_in_m3_daily:
+  source: sensor.watermeter_total_consumption
+  cycle: daily

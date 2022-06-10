@@ -1,0 +1,545 @@
+00_google_home_bak_buiten:
+  alias: 00 ♻️🔊 Google Home Bak Buiten
+  sequence:
+  - service: script.google_home_resume
+    data:
+      action:
+      - service: tts.cloud_say
+        data:
+          entity_id: media_player.keuken
+          language: nl-NL
+          message: De {{ states('sensor.purmerend_afval_morgen') }} bak moet naar
+            buiten vanavond.
+          options:
+            gender: female
+        extra:
+          volume: 1
+      target:
+        entity_id: media_player.keuken
+      resume_this_action: true
+  mode: single
+  icon: mdi:delete
+00_google_home_bak_binnen:
+  alias: 00 ♻️🔊 Google Home Bak Binnen
+  sequence:
+  - service: script.google_home_resume
+    data:
+      action:
+      - service: tts.cloud_say
+        data:
+          entity_id: media_player.computerkamer
+          language: nl-NL
+          message: De {{ states('sensor.purmerend_afval_vandaag') }} bak mag weer
+            naar binnen!
+          options:
+            gender: female
+        extra:
+          volume: 1
+      target:
+        entity_id:
+        - media_player.computerkamer
+      resume_this_action: true
+  mode: single
+  icon: mdi:delete
+00_notification_test:
+  alias: 00 🧪🔊 Testing 1 2 3
+  sequence:
+  - service: script.google_home_resume
+    data:
+      action:
+      - service: tts.cloud_say
+        data:
+          entity_id: media_player.washok
+          language: nl-NL
+          message: Testing 1 2 3
+          options:
+            gender: female
+        extra:
+          volume: 0.5
+      target:
+        entity_id: media_player.washok
+      resume_this_action: true
+  mode: single
+  icon: mdi:delete
+00_notification_test_multiple:
+  alias: 00 🧪🔊 Testing 4 5 6 Sound and Speech
+  sequence:
+  - service: script.google_home_resume
+    data:
+      action:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.washok
+          media_content_id: https://hass.io.bonnemaijers.net/local/audio/NS.mp3
+          media_content_type: audio/mp3
+        extra:
+          volume: 0.5
+      target:
+        entity_id: media_player.washok
+      resume_this_action: true
+  - service: script.google_home_resume
+    data:
+      action:
+      - service: tts.cloud_say
+        data:
+          entity_id: media_player.washok
+          language: nl-NL
+          message: Testing 4 5 6
+          options:
+            gender: female
+        extra:
+          volume: 0.5
+      target:
+        entity_id: media_player.washok
+      resume_this_action: true
+  - service: script.google_home_resume
+    data:
+      action:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.washok
+          media_content_id: https://hass.io.bonnemaijers.net/local/audio/NS.mp3
+          media_content_type: audio/mp3
+        extra:
+          volume: 0.5
+      target:
+        entity_id: media_player.washok
+      resume_this_action: true
+  mode: single
+  icon: mdi:delete
+afzuigkap_script:
+  alias: 00-02 🏠🔪Keuken - Afzuigkap
+  sequence:
+  - type: turn_off
+    device_id: 11bd848581cb83813c5f7eed3b08ef5f
+    entity_id: switch.afzuigkap
+    domain: switch
+  - wait_template: ''
+    timeout: '10'
+  - type: turn_on
+    device_id: 11bd848581cb83813c5f7eed3b08ef5f
+    entity_id: switch.afzuigkap
+    domain: switch
+  mode: parallel
+  max: 10
+  icon: mdi:stove
+ganglicht_beneden_script:
+  alias: 00-00 🏠💡 Gang Begane Grond - Licht Script
+  sequence:
+  - type: turn_on
+    device_id: 9c07a33be3fc5a2961cfc3ab46239cac
+    entity_id: switch.ganglicht_begane_grond
+    domain: switch
+  - wait_template: ''
+    timeout: '120'
+  - type: turn_off
+    device_id: 9c07a33be3fc5a2961cfc3ab46239cac
+    entity_id: switch.ganglicht_begane_grond
+    domain: switch
+  mode: parallel
+  max: 10
+  icon: mdi:stairs
+slapengaan:
+  sequence:
+  - service: script.turn_on
+    entity_id: script.ganglicht_beneden_script
+  - service: script.turn_on
+    entity_id: script.afzuigkap_script
+  mode: single
+  alias: 00-01 🏠💡 Woonkamer - Lichten Uit
+  icon: mdi:power
+surface_webcam_on:
+  alias: 00-01 🏠📷 Woonkamer - Surface Webcam On
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/muur-tablet/commands/run
+      payload: '{ "command": "C:\\Program Files (x86)\\Yawcam\\Yawcam.exe", "args":
+        "", "path": "C:\\Program Files (x86)\\Yawcam", "user": "", "visible": false,
+        "fallback": true }'
+  mode: single
+surface_webcam_off:
+  alias: 00-01 🏠📷 Woonkamer - Surface Webcam Off
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/muur-tablet/commands/run
+      payload: '{ "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "args": "-ExecutionPolicy Bypass -File C:\\Scripts\\webcam_off.ps1 -WindowStyle
+        Hidden", "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0", "user":
+        "", "visible": false, "fallback": true }'
+  mode: single
+surface_alarm:
+  alias: 00-01 🏠🚨 Woonkamer - Surface Alarm
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/muur-tablet/commands/run
+      payload: '{ "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "args": "-ExecutionPolicy Bypass -File C:\\alarm\\alarm.ps1 -WindowStyle Hidden",
+        "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0", "user": "", "visible":
+        false, "fallback": true }'
+  mode: single
+  icon: mdi:alarm
+tv_boven_power_cycle:
+  alias: 02-01 🏠📺 Slaapkamer Ons - TV Power Cycle
+  sequence:
+  - type: turn_off
+    device_id: f8a20a5a716a550fce14c208de352f40
+    entity_id: switch.tv_boven
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - type: turn_on
+    device_id: f8a20a5a716a550fce14c208de352f40
+    entity_id: switch.tv_boven
+    domain: switch
+  mode: single
+tv_beneden_power_cycle:
+  alias: 00-01 🏠📺 Woonkamer - TV Power Cycle
+  sequence:
+  - type: turn_off
+    device_id: c6dfd481f27e20bf34d1ffb7a640e4ad
+    entity_id: switch.tv_beneden
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - type: turn_on
+    device_id: c6dfd481f27e20bf34d1ffb7a640e4ad
+    entity_id: switch.tv_beneden
+    domain: switch
+  mode: single
+discolamp_kast:
+  alias: 00-01 🏠🚥 Woonkamer - Disco Kast
+  sequence:
+  - type: turn_off
+    device_id: b61aa840ef90352ad6dee95bb1a616e5
+    entity_id: light.speelgoedkast_lamp
+    domain: light
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: light.turn_on
+    target:
+      device_id: b61aa840ef90352ad6dee95bb1a616e5
+    data:
+      effect: Rainbow
+  - scene: scene.disco
+  mode: single
+  icon: mdi:party-popper
+keuken_disco:
+  alias: 00-02 🏠🔪 Keuken - Disco Keukenkastjes
+  sequence:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - type: turn_off
+    device_id: 75d771cd29505f617794bb9c5bea6666
+    entity_id: light.keukenkastjes_warm_white
+    domain: light
+  - type: turn_off
+    device_id: 75d771cd29505f617794bb9c5bea6666
+    entity_id: light.keukenkastjes_rood
+    domain: light
+  - type: turn_off
+    device_id: 75d771cd29505f617794bb9c5bea6666
+    entity_id: light.keukenkastjes_groen
+    domain: light
+  - type: turn_off
+    device_id: 75d771cd29505f617794bb9c5bea6666
+    entity_id: light.keukenkastjes_blauw
+    domain: light
+  - repeat:
+      while:
+      - condition: device
+        type: is_on
+        device_id: 78fd2f873a02ec8cc59e68dbdc82ca1b
+        entity_id: light.salontafel
+        domain: light
+      sequence:
+      - type: turn_on
+        device_id: 75d771cd29505f617794bb9c5bea6666
+        entity_id: light.keukenkastjes_rood
+        domain: light
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 1
+          milliseconds: 0
+      - type: turn_off
+        device_id: 75d771cd29505f617794bb9c5bea6666
+        entity_id: light.keukenkastjes_rood
+        domain: light
+      - type: turn_on
+        device_id: 75d771cd29505f617794bb9c5bea6666
+        entity_id: light.keukenkastjes_groen
+        domain: light
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 1
+          milliseconds: 0
+      - type: turn_off
+        device_id: 75d771cd29505f617794bb9c5bea6666
+        entity_id: light.keukenkastjes_groen
+        domain: light
+      - type: turn_on
+        device_id: 75d771cd29505f617794bb9c5bea6666
+        entity_id: light.keukenkastjes_blauw
+        domain: light
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 1
+          milliseconds: 0
+      - type: turn_off
+        device_id: 75d771cd29505f617794bb9c5bea6666
+        entity_id: light.keukenkastjes_blauw
+        domain: light
+  mode: parallel
+  max: 2
+growroom_tablet_webcam_off:
+  alias: 03 🥦 Growroom Tablet Webcam Off
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/growroom-tablet/commands/run
+      payload: '{ "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "args": "-ExecutionPolicy Bypass -File C:\\Scripts\\webcam_off.ps1 -WindowStyle
+        Hidden", "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0", "user":
+        "", "visible": false, "fallback": true }'
+  mode: single
+growroom_tablet_webcam_on:
+  alias: 03 🥦 Growroom Tablet Webcam On
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/growroom-tablet/commands/run
+      payload: '{ "command": "C:\\Program Files (x86)\\Yawcam\\Yawcam.exe", "args":
+        "", "path": "C:\\Program Files (x86)\\Yawcam", "user": "", "visible": false,
+        "fallback": true }'
+  mode: single
+growtent_muziek_12_12:
+  alias: 03 🥦 Growtent Muziek Aan 12-12
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/growroom-tablet/commands/run
+      payload: '{ "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "args": "-ExecutionPolicy Bypass -File C:\\Scripts\\music_12-12_on.ps1 -WindowStyle
+        Hidden", "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0", "user":
+        "", "visible": false, "fallback": true }'
+  mode: single
+  icon: mdi:music
+growtent_muziek_uit:
+  alias: 03 🥦 Growtent Muziek Uit
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/growroom-tablet/commands/run
+      payload: '{ "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "args": "-ExecutionPolicy Bypass -File C:\\Scripts\\music_off.ps1 -WindowStyle
+        Hidden", "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0", "user":
+        "", "visible": false, "fallback": true }'
+  mode: single
+  icon: mdi:music
+deurbel_batterij:
+  alias: 00-02 🏠🔪 Keuken - Deurbel Batterij
+  sequence:
+  - service: rflink.send_command
+    data:
+      command: 'on'
+      device_id: newkaku_01e7e82e_c
+  mode: single
+  icon: mdi:bell
+deurbel_dieren:
+  alias: 00-01 🏠🔔 Woonkamer - Dieren Deurbel
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/muur-tablet/commands/run
+      payload: '{ "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "args": "-ExecutionPolicy Bypass -File C:\\Deurbel\\call.ps1 -WindowStyle
+        Hidden", "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0", "user":
+        "", "visible": false, "fallback": true }'
+  mode: single
+  icon: mdi:cat
+deurbel_stekker:
+  alias: 01-00 🏠🔔Gang 1e Etage - Deurbel Stekker
+  sequence:
+  - service: rflink.send_command
+    data:
+      command: allon
+      device_id: newkaku_01473c5a_0
+  mode: single
+  icon: mdi:bell
+00_huis_uit:
+  alias: 00 🏠💡Huis Uit
+  sequence:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.licht_uit
+    metadata: {}
+  - service: scene.turn_on
+    target:
+      entity_id: scene.01_00_1e_etage_aan_duplicate
+    metadata: {}
+  - service: scene.turn_on
+    target:
+      entity_id: scene.02_01_zolder_uit
+    metadata: {}
+  mode: single
+00_huis_aan:
+  alias: 00 🏠💡Huis Aan
+  sequence:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.licht_aan
+    metadata: {}
+  - service: scene.turn_on
+    target:
+      entity_id: scene.1e_etage_aan
+    metadata: {}
+  - service: scene.turn_on
+    target:
+      entity_id: scene.02_01_zolder_aan
+    metadata: {}
+  mode: single
+00_01_woonkamer_disco_started:
+  alias: 00-01 🏠🚥 Woonkamer - Disco Started!
+  sequence:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.licht_uit
+    metadata: {}
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - type: turn_off
+    device_id: 9c07a33be3fc5a2961cfc3ab46239cac
+    entity_id: switch.ganglicht_begane_grond
+    domain: switch
+  - type: turn_on
+    device_id: 78fd2f873a02ec8cc59e68dbdc82ca1b
+    entity_id: light.salontafel
+    domain: light
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 500
+  - service: script.turn_on
+    data: {}
+    target:
+      entity_id: script.discolamp_kast
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 500
+  - service: script.turn_on
+    data: {}
+    target:
+      entity_id: script.00_00_tuin_disco
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 500
+  - service: script.turn_on
+    data: {}
+    target:
+      entity_id: script.keuken_disco
+  mode: single
+  icon: mdi:party-popper
+00_00_tuin_disco:
+  alias: 00-00 🏠🚥 Tuin - Disco
+  sequence:
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_1
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_2
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_3
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_4
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_5
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_6
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_7
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      effect: Meteor Shower
+    target:
+      entity_id: light.tuinverlichting_schuur
+  mode: single

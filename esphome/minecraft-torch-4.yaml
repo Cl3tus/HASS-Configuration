@@ -1,0 +1,81 @@
+esphome:
+  name: minecraft-torch-4
+  comment: Minecraft Torch 4
+
+esp8266:
+  board: nodemcuv2
+  restore_from_flash: true
+
+preferences:
+  flash_write_interval: 1min
+
+# Enable logging
+logger:
+#    level: VERY_VERBOSE
+    
+# Enable Home Assistant API
+api:
+  password: !secret pb_std_pass
+
+# Enable OTA
+ota:
+  password: !secret pb_std_pass
+
+wifi:
+  ssid: "Obi WLAN Kenobi"
+  password: !secret pb_std_pass
+  domain: .bonnemaijers.net
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Minecraft Torch 4"
+    password: !secret pb_std_pass
+
+captive_portal:
+
+# Timesync with home
+time:
+  - platform: homeassistant
+
+# Variables
+substitutions:
+  name: minecraft-torch-4
+  friendly_name: "Minecraft Torch 4"
+
+# Diagnostic Sensors
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+# Light
+light:
+  - platform: neopixelbus
+    method: esp8266_dma
+    type: GRBW
+    variant: SK6812
+    color_correct: [95%, 95%, 95%, 95%]
+    pin: GPIO3
+    num_leds: 15
+    name: "Minecraft Torch 4"
+    effects:
+      - flicker:
+          name: Fire
+          alpha: 90%
+          intensity: 3.5%
+      - addressable_rainbow:
+    restore_mode: RESTORE_DEFAULT_OFF
